@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.JsonMappingException
 import com.fasterxml.jackson.databind.exc.MismatchedInputException
 import org.springframework.context.support.DefaultMessageSourceResolvable
 import org.springframework.http.HttpStatus
-import org.springframework.http.ResponseEntity
 import org.springframework.http.converter.HttpMessageNotReadableException
 import org.springframework.validation.FieldError
 import org.springframework.web.bind.MethodArgumentNotValidException
@@ -19,17 +18,6 @@ import kotlin.Any
 
 @RestControllerAdvice
 class ErrorHandler {
-
-
-//    @ExceptionHandler
-//    @ResponseStatus(HttpStatus.BAD_REQUEST)
-//    fun handleErrors(e: HttpMessageNotReadableException): ValidationErrors {
-//        val message = e.mostSpecificCause.message!!
-//        val reason = message
-//            .map { ValidationError("code", listOf(message)) }
-//
-//        return ValidationErrors(reason)
-//    }
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -65,7 +53,7 @@ class ErrorHandler {
                         ": " + msg
             }
         }
-        return ValidationErrors(listOf(ValidationError("code", listOf(msg!!))))
+        return ValidationErrors(listOf(ValidationError("constraint", listOf(msg!!))))
     }
 
     private fun mapToValidationError(fieldError: FieldError): ValidationError {

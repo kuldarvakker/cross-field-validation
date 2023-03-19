@@ -5,14 +5,14 @@ import org.springframework.validation.annotation.Validated
 
 @Validated
 data class Address(
-    @Size(min = 1)
+    @field:Size(min = 2)
     val street: String,
-    @Size(min = 1)
+    @field:Size(min = 2)
     val city: String,
-    @Size(min = 1)
+    @field:Size(min = 2)
     val state: String,
-    @Size(min = 1)
+    @field:Size(min = 2)
     val country: String,
-    @Size(min = 1)
+    @field:Size(min = 2)
     val postalCode: String
 )
