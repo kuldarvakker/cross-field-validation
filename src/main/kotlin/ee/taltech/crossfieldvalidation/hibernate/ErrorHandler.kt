@@ -57,11 +57,16 @@ class ErrorHandler {
     }
 
     private fun mapToValidationError(fieldError: FieldError): ValidationError {
+        println(fieldError)
         val code = fieldError.codes!![0]
         val arg = Arrays.stream(fieldError.arguments)
             .filter { args: Any? -> args !is DefaultMessageSourceResolvable }
             .map { obj: Any? -> obj.toString() }
             .collect(Collectors.toList())
+        if (arg.isEmpty() && fieldError.defaultMessage != null) {
+            val defaultArg = listOf(fieldError.defaultMessage!!)
+            return ValidationError(code, defaultArg)
+        }
         return ValidationError(code, arg)
     }
 }
