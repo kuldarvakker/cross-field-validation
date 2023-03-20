@@ -1,6 +1,7 @@
 package ee.taltech.crossfieldvalidation.hibernate.model
 
 import ee.taltech.crossfieldvalidation.hibernate.model.attributes.Address
+import jakarta.validation.constraints.AssertTrue
 
 import jakarta.validation.constraints.NotEmpty
 import jakarta.validation.constraints.NotNull
@@ -18,4 +19,10 @@ data class Company(
     val emails: List<String>,
     @field:NotEmpty
     val addresses: List<Address>
-) : Person()
+) : Person() {
+
+    @AssertTrue
+    fun isNameContainingCompanyType(): Boolean {
+        return name.contains(regex = "OÜ|AS".toRegex())
+    }
+}
