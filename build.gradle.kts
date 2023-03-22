@@ -27,8 +27,15 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
 
+	//hibernate
+	implementation("org.hibernate.validator:hibernate-validator:8.0.0.Final")
+
 	// valiktor
 	implementation("org.valiktor:valiktor-core:0.12.0")
+
+	// java fluent
+	implementation("com.github.mvallim:java-fluent-validator:1.10.0")
+
 }
 
 tasks.withType<KotlinCompile> {

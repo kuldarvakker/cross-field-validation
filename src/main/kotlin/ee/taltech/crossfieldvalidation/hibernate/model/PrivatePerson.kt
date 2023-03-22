@@ -1,5 +1,6 @@
 package ee.taltech.crossfieldvalidation.hibernate.model
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import ee.taltech.crossfieldvalidation.hibernate.model.attributes.Address
 import ee.taltech.crossfieldvalidation.hibernate.model.attributes.Height
 import ee.taltech.crossfieldvalidation.hibernate.model.attributes.Weight
@@ -28,6 +29,7 @@ data class PrivatePerson(
     val weight: Weight
 ) : Person() {
 
+    @JsonIgnore
     @AssertTrue(message = "Phone or Email must be present")
     fun isAtLeastPhoneOrEmailPresent(): Boolean {
         if (phoneNumber != null && emails != null) {

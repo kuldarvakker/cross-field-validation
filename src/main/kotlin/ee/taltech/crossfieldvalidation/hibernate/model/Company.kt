@@ -1,5 +1,6 @@
 package ee.taltech.crossfieldvalidation.hibernate.model
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import ee.taltech.crossfieldvalidation.hibernate.model.attributes.Address
 import jakarta.validation.constraints.AssertTrue
 
@@ -21,6 +22,7 @@ data class Company(
     val addresses: List<Address>
 ) : Person() {
 
+    @JsonIgnore
     @AssertTrue
     fun isNameContainingCompanyType(): Boolean {
         return name.contains(regex = "OÜ|AS".toRegex())
