@@ -1,7 +1,7 @@
 package ee.taltech.crossfieldvalidation.valiktor.model
 
 import ee.taltech.crossfieldvalidation.valiktor.model.attributes.Address
-import ee.taltech.crossfieldvalidation.valiktor.model.attributes.Length
+import ee.taltech.crossfieldvalidation.valiktor.model.attributes.Height
 import ee.taltech.crossfieldvalidation.valiktor.model.attributes.Weight
 
 data class PrivatePerson(
@@ -11,7 +11,7 @@ data class PrivatePerson(
     val phoneNumber: String?,
     val email: String?,
     val address: Address,
-    val height: Length,
+    val height: Height,
     val weight: Weight
 ) : Person()
 
