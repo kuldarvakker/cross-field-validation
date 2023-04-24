@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class KonformController {
 
-    @PostMapping("/api/ktor")
+    @PostMapping("/api/konform")
     fun validatePerson(@Valid @RequestBody person: Person): ResponseEntity<Person> {
 
         return ResponseEntity.status(HttpStatus.OK).body(person)
