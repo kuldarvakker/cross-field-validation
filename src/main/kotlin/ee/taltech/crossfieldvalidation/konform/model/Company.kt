@@ -1,6 +1,6 @@
-package ee.taltech.crossfieldvalidation.ktor.model
+package ee.taltech.crossfieldvalidation.konform.model
 
-import ee.taltech.crossfieldvalidation.ktor.model.attributes.Address
+import ee.taltech.crossfieldvalidation.konform.model.attributes.Address
 
 data class Company(
     override val type: PersonType = PersonType.COMPANY,

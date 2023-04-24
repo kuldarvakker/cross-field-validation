@@ -1,8 +1,8 @@
-package ee.taltech.crossfieldvalidation.ktor.model
+package ee.taltech.crossfieldvalidation.konform.model
 
-import ee.taltech.crossfieldvalidation.ktor.model.attributes.Address
-import ee.taltech.crossfieldvalidation.ktor.model.attributes.Length
-import ee.taltech.crossfieldvalidation.ktor.model.attributes.Weight
+import ee.taltech.crossfieldvalidation.konform.model.attributes.Address
+import ee.taltech.crossfieldvalidation.konform.model.attributes.Length
+import ee.taltech.crossfieldvalidation.konform.model.attributes.Weight
 
 data class PrivatePerson(
     override val type: PersonType = PersonType.PRIVATE,

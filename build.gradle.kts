@@ -36,6 +36,9 @@ dependencies {
 	// java fluent
 	implementation("com.github.mvallim:java-fluent-validator:1.10.0")
 
+	// konform
+	implementation("io.konform:konform-jvm:0.4.0")
+
 }
 
 tasks.withType<KotlinCompile> {

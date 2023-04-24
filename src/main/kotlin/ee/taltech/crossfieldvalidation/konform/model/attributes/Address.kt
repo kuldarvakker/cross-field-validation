@@ -1,4 +1,4 @@
-package ee.taltech.crossfieldvalidation.ktor.model.attributes
+package ee.taltech.crossfieldvalidation.konform.model.attributes
 data class Address(
     val street: String,
     val city: String,

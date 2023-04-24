@@ -1,4 +1,4 @@
-package ee.taltech.crossfieldvalidation.ktor.model
+package ee.taltech.crossfieldvalidation.konform.model
 
 import com.fasterxml.jackson.annotation.JsonSubTypes
 import com.fasterxml.jackson.annotation.JsonTypeInfo
