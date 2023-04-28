@@ -8,6 +8,9 @@ import org.valiktor.*
 import org.valiktor.functions.hasSize
 import org.valiktor.functions.isValid
 import org.valiktor.functions.validate
+import kotlin.reflect.KProperty1
+import kotlin.reflect.full.memberProperties
+import kotlin.reflect.jvm.isAccessible
 
 
 data class PrivatePerson(
@@ -45,6 +48,9 @@ data class PrivatePerson(
                 validate(Height::value).withMessage("numeric value out of bounds (<3 digits>.<2 digits> expected)") { value ->
                     value?.let { checkNumericValueBounds(it, 3,2) } ?: true
                 }
+//                validate(Height::value).include(Height::unit).withMessage("custom message") { value, unit ->
+//                    value?.let { checkNumericValueBounds(it, 3,2) && unit != null && unit == Units.CM } ?: true
+//                }
             }
         }
     }
@@ -58,4 +64,30 @@ data class PrivatePerson(
 
     fun <E, T> Validator<E>.Property<T?>.withMessage(message: String, block: (T?) -> Boolean) =
         this.validate(Custom(message)) { block.invoke(it) }
+
+    fun <E, T, A> Validator<E>.Property<T?>.include(property: KProperty1<E, A?>): Pair<Validator<E>.Property<T?>, Validator<E>.Property<A & Any>> {
+        val a = Validator(this.obj).Property(this.obj, property)
+        return Pair(this, a)
+    }
+
+    fun <E, T, A, B> Validator<E>.Property<T?>.include(property: KProperty1<E, A?>, property2: KProperty1<E, B?>): Triple<Validator<E>.Property<T?>, Validator<E>.Property<A & Any>, Validator<E>.Property<B & Any>> {
+        val a = Validator(this.obj).Property(this.obj, property)
+        val b = Validator(this.obj).Property(this.obj, property2)
+        return Triple(this, a, b)
+    }
+
+    fun <E, T, A> Pair<Validator<E>.Property<T?>, Validator<E>.Property<A & Any>>.withMessage(message: String, block: (T?, A?) -> Boolean) {
+        this.first.validate(Custom(message)) { block.invoke(it, this.second.property.get(this.second.obj)) }
+    }
+
+    fun <E, T, A, B> Triple<Validator<E>.Property<T?>, Validator<E>.Property<A & Any>, Validator<E>.Property<B & Any>>.withMessage(message: String, block: (T?, A?, B?) -> Boolean) {
+        this.first.validate(Custom(message)) { block.invoke(it, this.second.property.get(this.second.obj), this.third.property.get(this.third.obj)) }
+    }
+
+    inline fun <reified T : Any, R> T.getPrivateProperty(name: String): R? =
+        T::class
+            .memberProperties
+            .firstOrNull { it.name == name }
+            ?.apply { isAccessible = true }
+            ?.get(this) as? R
 }
