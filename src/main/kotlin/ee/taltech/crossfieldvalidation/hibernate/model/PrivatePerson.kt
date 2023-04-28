@@ -29,16 +29,5 @@ data class PrivatePerson(
 
     @JsonIgnore
     @AssertTrue(message = "Phone or Email must be present")
-    fun isAtLeastPhoneOrEmailPresent(): Boolean {
-        if (phoneNumber != null && emails != null) {
-            return true
-        } else if (phoneNumber != null) {
-            return true
-        } else if (phoneNumber == null && emails != null && emails!!.isNotEmpty()) {
-            return true
-        }
-        return false
-    }
+    fun isAtLeastPhoneOrEmailPresent(): Boolean = (!phoneNumber.isNullOrBlank() || !emails.isNullOrEmpty())
 }
-
-
