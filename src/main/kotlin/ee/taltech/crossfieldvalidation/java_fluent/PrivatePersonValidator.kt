@@ -66,16 +66,7 @@ class PrivatePersonValidator : AbstractValidator<PrivatePerson> {
             .withFieldName("weight.value")
 
         ruleFor {person -> person}
-            .must {
-                if (it.phoneNumber != null && it.emails != null) {
-                    true
-                } else if (it.phoneNumber != null) {
-                    true
-                } else if (it.phoneNumber == null && it.emails != null && it.emails!!.isNotEmpty()) {
-                    true
-                }
-                false
-            }
+            .must {(!it.phoneNumber.isNullOrBlank() || !it.emails.isNullOrEmpty())}
             .withMessage("Phone or Email must be present")
             .withFieldName("atLeastPhoneOrEmailPresent")
     }
