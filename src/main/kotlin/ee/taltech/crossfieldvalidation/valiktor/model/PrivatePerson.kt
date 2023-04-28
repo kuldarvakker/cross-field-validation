@@ -24,15 +24,8 @@ data class PrivatePerson(
             validate(PrivatePerson::type).isValid { it == PersonType.PRIVATE }
             validate(PrivatePerson::firstName).hasSize(min = 2, max = 4)
             validate(PrivatePerson::lastName).hasSize(min = 5, max = 10)
-            validate(PrivatePerson::phoneNumber).withMessage("Phone or Email must be present") { pn ->
-                if (pn != null && person.emails != null) {
-                    return@withMessage true
-                } else if (pn != null) {
-                    return@withMessage true
-                } else if (!person.emails.isNullOrEmpty()) {
-                    return@withMessage true
-                }
-                return@withMessage false
+            validate(PrivatePerson::phoneNumber).withMessage("Phone or Email must be present") {
+                (!it.isNullOrBlank() || !person.emails.isNullOrEmpty())
             }
             validate(PrivatePerson::phoneNumber).hasSize(max = 10)
             validate(PrivatePerson::address).validate {
@@ -44,9 +37,7 @@ data class PrivatePerson(
             }
             validate(PrivatePerson::weight).validate {
                 validate(Weight::value).withMessage("numeric value out of bounds (<3 digits>.<2 digits> expected)") { value ->
-                    if (value == null) {
-                        return@withMessage true
-                    }
+                    if (value == null) return@withMessage true
                     if (value.scale() > 2) return@withMessage false
                     if (value.precision() - value.scale() > 3) return@withMessage false
                     return@withMessage true
@@ -54,9 +45,7 @@ data class PrivatePerson(
             }
             validate(PrivatePerson::height).validate {
                 validate(Height::value).withMessage("numeric value out of bounds (<3 digits>.<2 digits> expected)") { value ->
-                    if (value == null) {
-                        return@withMessage true
-                    }
+                    if (value == null) return@withMessage true
                     if (value.scale() > 2) return@withMessage false
                     if (value.precision() - value.scale() > 3) return@withMessage false
                     return@withMessage true
