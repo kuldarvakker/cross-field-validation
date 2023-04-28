@@ -1,5 +1,6 @@
 package ee.taltech.crossfieldvalidation.konform.model
 
+import ee.taltech.crossfieldvalidation.checkNumericValueBounds
 import ee.taltech.crossfieldvalidation.konform.model.attributes.Address
 import ee.taltech.crossfieldvalidation.konform.model.attributes.Height
 import ee.taltech.crossfieldvalidation.konform.model.attributes.Weight
@@ -48,14 +49,14 @@ data class PrivatePerson(
             PrivatePerson::weight required {
                 Weight::value required {
                     addConstraint("numeric value out of bounds (<3 digits>.<2 digits> expected)") {
-                        it.scale() < 2 || it.precision() - it.scale() < 3
+                        checkNumericValueBounds(it, 3,2)
                     }
                 }
             }
             PrivatePerson::height required {
                 Height::value required {
                     addConstraint("numeric value out of bounds (<3 digits>.<2 digits> expected)") {
-                        it.scale() < 2 || it.precision() - it.scale() < 3
+                        checkNumericValueBounds(it, 3,2)
                     }
                 }
             }

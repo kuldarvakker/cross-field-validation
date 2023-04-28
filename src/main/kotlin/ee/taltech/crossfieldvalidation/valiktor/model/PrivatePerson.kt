@@ -1,5 +1,6 @@
 package ee.taltech.crossfieldvalidation.valiktor.model
 
+import ee.taltech.crossfieldvalidation.checkNumericValueBounds
 import ee.taltech.crossfieldvalidation.valiktor.model.attributes.Address
 import ee.taltech.crossfieldvalidation.valiktor.model.attributes.Height
 import ee.taltech.crossfieldvalidation.valiktor.model.attributes.Weight
@@ -37,18 +38,12 @@ data class PrivatePerson(
             }
             validate(PrivatePerson::weight).validate {
                 validate(Weight::value).withMessage("numeric value out of bounds (<3 digits>.<2 digits> expected)") { value ->
-                    if (value == null) return@withMessage true
-                    if (value.scale() > 2) return@withMessage false
-                    if (value.precision() - value.scale() > 3) return@withMessage false
-                    return@withMessage true
+                    value?.let { checkNumericValueBounds(it, 3,2) } ?: true
                 }
             }
             validate(PrivatePerson::height).validate {
                 validate(Height::value).withMessage("numeric value out of bounds (<3 digits>.<2 digits> expected)") { value ->
-                    if (value == null) return@withMessage true
-                    if (value.scale() > 2) return@withMessage false
-                    if (value.precision() - value.scale() > 3) return@withMessage false
-                    return@withMessage true
+                    value?.let { checkNumericValueBounds(it, 3,2) } ?: true
                 }
             }
         }
