@@ -3,6 +3,7 @@ package ee.taltech.crossfieldvalidation.java_fluent
 import br.com.fluentvalidator.Validator
 import ee.taltech.crossfieldvalidation.ValidationError
 import ee.taltech.crossfieldvalidation.ValidationErrors
+import ee.taltech.crossfieldvalidation.java_fluent.model.Company
 import ee.taltech.crossfieldvalidation.java_fluent.model.Person
 import ee.taltech.crossfieldvalidation.java_fluent.model.PersonType
 import ee.taltech.crossfieldvalidation.java_fluent.model.PrivatePerson
@@ -16,12 +17,13 @@ import org.springframework.web.bind.annotation.RequestBody
 class JavaFluentController {
 
     private final val privatePersonValidator: Validator<PrivatePerson> = PrivatePersonValidator()
+    private final val companyValidator: Validator<Company> = CompanyValidator()
 
     @PostMapping("/api/java_fluent")
     fun validatePerson(@RequestBody person: Person): ResponseEntity<*> {
         val results = when (person.type) {
             PersonType.PRIVATE -> privatePersonValidator.validate(person as PrivatePerson)
-            PersonType.COMPANY -> privatePersonValidator.validate(person as PrivatePerson)
+            PersonType.COMPANY -> companyValidator.validate(person as Company)
         }
         if (!results.isValid) {
             val errors = results.errors.map {
