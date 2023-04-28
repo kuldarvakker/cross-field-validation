@@ -39,32 +39,69 @@ class KonformControllerTest(@Autowired private val mockMvc: MockMvc) {
                 {
                   "errors": [
                     {
-                      "field": "address.city",
-                      "message": "Size must be greater than or equal to 2"
+                      "field": ".address.city",
+                      "message": "must have at least 2 characters"
                     },
                     {
-                      "field": "firstName",
-                      "message": "Size must be between 2 and 4"
+                      "field": ".firstName",
+                      "message": "must have at most 4 characters"
                     },
                     {
-                      "field": "phoneNumber",
+                      "field": "",
                       "message": "Phone or Email must be present"
                     },
                     {
-                      "field": "height.value",
+                      "field": ".height.value",
                       "message": "numeric value out of bounds (<3 digits>.<2 digits> expected)"
                     },
                     {
-                      "field": "weight.value",
+                      "field": ".weight.value",
                       "message": "numeric value out of bounds (<3 digits>.<2 digits> expected)"
                     },
                     {
-                      "field": "address.street",
-                      "message": "Size must be greater than or equal to 2"
+                      "field": ".address.street",
+                      "message": "must have at least 2 characters"
                     }
                   ]
                 }
             """.trimIndent())
+            }
+        }
+    }
+
+    @Test
+    fun `validateCompany - success`() {
+        mockMvc.post(url) {
+            contentType = MediaType.APPLICATION_JSON
+            content = PersonJson.validCompany
+            accept = MediaType.APPLICATION_JSON
+        }.andExpect {
+            status { isOk() }
+            content { json(PersonJson.validCompany, strict = true) }
+        }
+    }
+
+    @Test
+    fun `validateCompany - failure`() {
+        mockMvc.post(url) {
+            contentType = MediaType.APPLICATION_JSON
+            content = PersonJson.invalidCompany
+            accept = MediaType.APPLICATION_JSON
+        }.andExpect {
+            status { isBadRequest() }
+            content {
+                json("""
+                    {
+                      "errors": [
+                        {
+                          "field": ".name",
+                          "message": "must have at most 4 characters"
+                        }
+                      ]
+                    }
+                """.trimIndent(),
+                    strict = true
+                )
             }
         }
     }
