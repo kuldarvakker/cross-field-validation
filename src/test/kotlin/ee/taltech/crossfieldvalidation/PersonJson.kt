@@ -51,4 +51,18 @@ object PersonJson {
             }
         }
     """.trimIndent()
+
+    val validCompany = """
+        {
+            "type": "COMPANY",
+            "name": "Name"
+        }
+    """.trimIndent()
+
+    val invalidCompany = """
+        {
+            "type": "COMPANY",
+            "name": "Too Lengthy Name"
+        }
+    """.trimIndent()
 }

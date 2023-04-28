@@ -17,6 +17,7 @@ data class PrivatePerson(
     @field:Size(min = 5, max = 10)
     val lastName: String,
     @field:Size(max = 10)
+    // @field:Max(value = 10) fails the test
     val phoneNumber: String?,
     val emails: List<String>?,
     @field:Valid

@@ -37,35 +37,73 @@ class HibernateControllerTest(@Autowired private val mockMvc: MockMvc) {
         }.andExpect {
             status { isBadRequest() }
             content { json("""
-                {
-                  "errors": [
                     {
-                      "field": "address.city",
-                      "message": "size must be between 2 and 2147483647"
-                    },
-                    {
-                      "field": "firstName",
-                      "message": "size must be between 2 and 4"
-                    },
-                    {
-                      "field": "atLeastPhoneOrEmailPresent",
-                      "message": "Phone or Email must be present"
-                    },
-                    {
-                      "field": "height.value",
-                      "message": "numeric value out of bounds (<3 digits>.<2 digits> expected)"
-                    },
-                    {
-                      "field": "weight.value",
-                      "message": "numeric value out of bounds (<3 digits>.<2 digits> expected)"
-                    },
-                    {
-                      "field": "address.street",
-                      "message": "size must be between 2 and 2147483647"
+                      "errors": [
+                        {
+                          "field": "address.city",
+                          "message": "size must be between 2 and 2147483647"
+                        },
+                        {
+                          "field": "firstName",
+                          "message": "size must be between 2 and 4"
+                        },
+                        {
+                          "field": "atLeastPhoneOrEmailPresent",
+                          "message": "Phone or Email must be present"
+                        },
+                        {
+                          "field": "height.value",
+                          "message": "numeric value out of bounds (<3 digits>.<2 digits> expected)"
+                        },
+                        {
+                          "field": "weight.value",
+                          "message": "numeric value out of bounds (<3 digits>.<2 digits> expected)"
+                        },
+                        {
+                          "field": "address.street",
+                          "message": "size must be between 2 and 2147483647"
+                        }
+                      ]
                     }
-                  ]
-                }
-            """.trimIndent())
+                """.trimIndent()
+                )
+            }
+        }
+    }
+
+    @Test
+    fun `validateCompany - success`() {
+        mockMvc.post(url) {
+            contentType = MediaType.APPLICATION_JSON
+            content = PersonJson.validCompany
+            accept = MediaType.APPLICATION_JSON
+        }.andExpect {
+            status { isOk() }
+            content { json(PersonJson.validCompany, strict = true) }
+        }
+    }
+
+    @Test
+    fun `validateCompany - failure`() {
+        mockMvc.post(url) {
+            contentType = MediaType.APPLICATION_JSON
+            content = PersonJson.invalidCompany
+            accept = MediaType.APPLICATION_JSON
+        }.andExpect {
+            status { isBadRequest() }
+            content {
+                json("""
+                    {
+                      "errors": [
+                        {
+                          "field": "name",
+                          "message": "size must be between 2 and 4"
+                        }
+                      ]
+                    }
+                """.trimIndent(),
+                    strict = true
+                )
             }
         }
     }
