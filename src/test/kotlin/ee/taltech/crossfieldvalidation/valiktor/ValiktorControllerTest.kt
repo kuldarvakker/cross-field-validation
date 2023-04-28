@@ -68,4 +68,41 @@ class ValiktorControllerTest(@Autowired private val mockMvc: MockMvc) {
             }
         }
     }
+
+    @Test
+    fun `validateCompany - success`() {
+        mockMvc.post(url) {
+            contentType = MediaType.APPLICATION_JSON
+            content = PersonJson.validCompany
+            accept = MediaType.APPLICATION_JSON
+        }.andExpect {
+            status { isOk() }
+            content { json(PersonJson.validCompany, strict = true) }
+        }
+    }
+
+    @Test
+    fun `validateCompany - failure`() {
+        mockMvc.post(url) {
+            contentType = MediaType.APPLICATION_JSON
+            content = PersonJson.invalidCompany
+            accept = MediaType.APPLICATION_JSON
+        }.andExpect {
+            status { isBadRequest() }
+            content {
+                json("""
+                    {
+                      "errors": [
+                        {
+                          "field": "name",
+                          "message": "Size must be between 2 and 4"
+                        }
+                      ]
+                    }
+                """.trimIndent(),
+                    strict = true
+                )
+            }
+        }
+    }
 }
