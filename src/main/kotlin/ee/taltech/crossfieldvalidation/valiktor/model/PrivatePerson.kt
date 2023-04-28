@@ -90,4 +90,27 @@ data class PrivatePerson(
             .firstOrNull { it.name == name }
             ?.apply { isAccessible = true }
             ?.get(this) as? R
+
+    fun <E, A, B> Validator<E>.validate(str: String,property: KProperty1<E, A?>, property2: KProperty1<E, B?>): Pair<Validator<E>.Property<A>, Validator<E>.Property<B & Any>> {
+        val a = this.Property(this.getPrivateProperty("obj")!!, property)
+        val b = this.Property(this.getPrivateProperty("obj")!!, property2)
+        return Pair(a as Validator<E>.Property<A>, b)
+    }
+
+    fun <E, T> Validator<E>.Property<T?>.withFieldName(str: String,block: Validator<T>.(T) -> Unit): Validator<E>.Property<T?> {
+        val value = this.property.get(this.obj)
+        if (value != null) {
+            this.addConstraintViolations(
+                Validator(value as T).apply { block(value) }.constraintViolations.map {
+                    DefaultConstraintViolation(
+                        property = "${str}.${it.property}",
+                        value = it.value,
+                        constraint = it.constraint
+                    )
+                }
+            )
+        }
+        return this
+    }
+
 }
