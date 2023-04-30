@@ -39,6 +39,8 @@ dependencies {
 	// konform
 	implementation("io.konform:konform-jvm:0.4.0")
 
+	// yavi
+	implementation("am.ik.yavi:yavi:0.12.1")
 }
 
 tasks.withType<KotlinCompile> {
