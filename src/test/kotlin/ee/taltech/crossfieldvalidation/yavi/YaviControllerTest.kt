@@ -40,11 +40,11 @@ class YaviControllerTest(@Autowired private val mockMvc: MockMvc) {
                   "errors": [
                     {
                       "field": "address.city",
-                      "message": "Size must be greater than or equal to 2"
+                      "message": "The size of \"address.city\" must be greater than or equal to 2. The given size is 0"
                     },
                     {
                       "field": "firstName",
-                      "message": "Size must be between 2 and 4"
+                      "message": "The size of \"firstName\" must be less than or equal to 4. The given size is 6"
                     },
                     {
                       "field": "phoneNumber",
@@ -60,7 +60,7 @@ class YaviControllerTest(@Autowired private val mockMvc: MockMvc) {
                     },
                     {
                       "field": "address.street",
-                      "message": "Size must be greater than or equal to 2"
+                      "message": "The size of \"address.street\" must be greater than or equal to 2. The given size is 1"
                     }
                   ]
                 }
