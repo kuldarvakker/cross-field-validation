@@ -23,14 +23,14 @@ class JavaFluentController {
     fun validatePerson(@RequestBody person: Person): ResponseEntity<*> {
         val validationErrors = validate(person)
 
-        return if (validationErrors == null) {
+        return if (validationErrors.errors.isEmpty()) {
             ResponseEntity.status(HttpStatus.OK).body(person)
         } else {
             ResponseEntity.status(HttpStatus.BAD_REQUEST).body(validationErrors)
         }
     }
 
-    private fun validate(person: Person): ValidationErrors? {
+    private fun validate(person: Person): ValidationErrors {
         val results = when (person.type) {
             PersonType.PRIVATE -> privatePersonValidator.validate(person as PrivatePerson)
             PersonType.COMPANY -> companyValidator.validate(person as Company)
@@ -44,7 +44,7 @@ class JavaFluentController {
             }
             ValidationErrors(errors)
         } else {
-            null
+            ValidationErrors(emptyList())
         }
     }
 }
