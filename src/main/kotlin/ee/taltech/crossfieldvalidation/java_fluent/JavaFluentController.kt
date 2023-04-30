@@ -21,21 +21,30 @@ class JavaFluentController {
 
     @PostMapping("/api/java_fluent")
     fun validatePerson(@RequestBody person: Person): ResponseEntity<*> {
+        val validationErrors = validate(person)
+
+        return if (validationErrors == null) {
+            ResponseEntity.status(HttpStatus.OK).body(person)
+        } else {
+            ResponseEntity.status(HttpStatus.BAD_REQUEST).body(validationErrors)
+        }
+    }
+
+    private fun validate(person: Person): ValidationErrors? {
         val results = when (person.type) {
             PersonType.PRIVATE -> privatePersonValidator.validate(person as PrivatePerson)
             PersonType.COMPANY -> companyValidator.validate(person as Company)
         }
-        if (!results.isValid) {
+        return if (!results.isValid) {
             val errors = results.errors.map {
                 ValidationError(
                     field =it.field ?: "null code",
                     message = it.message
                 )
             }
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ValidationErrors(errors))
+            ValidationErrors(errors)
+        } else {
+            null
         }
-
-        return ResponseEntity.status(HttpStatus.OK).body(person)
-
     }
 }

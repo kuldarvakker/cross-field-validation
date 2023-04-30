@@ -18,22 +18,32 @@ class HibernateController {
 
     @PostMapping("/api/hibernate")
     fun validatePerson(@RequestBody person: Person): ResponseEntity<*> {
+        val validationErrors = validate(person)
+
+        return if (validationErrors == null) {
+            ResponseEntity.status(HttpStatus.OK).body(person)
+        } else {
+            ResponseEntity.status(HttpStatus.BAD_REQUEST).body(validationErrors)
+        }
+    }
+
+    private fun getValidator(): Validator {
+        val factory = Validation.buildDefaultValidatorFactory()
+        return factory.validator
+    }
+
+    private fun validate(person: Person): ValidationErrors? {
         val results = validator.validate(person)
-        if (results.isNotEmpty()) {
+        return if (results.isNotEmpty()) {
             val errors = results.map {
                 ValidationError(
-                    field =it.propertyPath.toString(),
+                    field = it.propertyPath.toString(),
                     message = it.message
                 )
             }
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ValidationErrors(errors))
+            ValidationErrors(errors)
+        } else {
+            null
         }
-
-        return ResponseEntity.status(HttpStatus.OK).body(person)
-    }
-
-    private final fun getValidator(): Validator {
-        val factory = Validation.buildDefaultValidatorFactory()
-        return factory.validator
     }
 }
