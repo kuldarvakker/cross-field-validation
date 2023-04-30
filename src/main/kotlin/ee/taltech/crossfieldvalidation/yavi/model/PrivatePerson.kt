@@ -9,7 +9,7 @@ data class PrivatePerson(
     val firstName: String,
     val lastName: String,
     val phoneNumber: String?,
-    val email: String?,
+    val emails: List<String>?,
     val address: Address,
     val height: Height,
     val weight: Weight
