@@ -18,21 +18,30 @@ class KonformController {
 
     @PostMapping("/api/konform")
     fun validatePerson(@Valid @RequestBody person: Person): ResponseEntity<*> {
+        val validationErrors = validate(person)
+
+        return if (validationErrors == null) {
+            ResponseEntity.status(HttpStatus.OK).body(person)
+        } else {
+            ResponseEntity.status(HttpStatus.BAD_REQUEST).body(validationErrors)
+        }
+    }
+
+    private fun validate(person: Person): ValidationErrors? {
         val results = when (person.type) {
             PersonType.PRIVATE -> PrivatePerson.validate(person as PrivatePerson)
             PersonType.COMPANY -> Company.validate(person as Company)
         }
-        if (results.errors.isNotEmpty()) {
+        return if (results.errors.isNotEmpty()) {
             val errors = results.errors.map {
                 ValidationError(
-                    field =it.dataPath,
+                    field = it.dataPath,
                     message = it.message
                 )
             }
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ValidationErrors(errors))
+            ValidationErrors(errors)
+        } else {
+            null
         }
-
-        return ResponseEntity.status(HttpStatus.OK).body(person)
     }
-
 }
