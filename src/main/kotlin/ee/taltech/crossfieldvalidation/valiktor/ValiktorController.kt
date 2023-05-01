@@ -5,18 +5,21 @@ import ee.taltech.crossfieldvalidation.ValidationErrors
 import ee.taltech.crossfieldvalidation.valiktor.model.Person
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.ExceptionHandler
+import org.springframework.web.bind.annotation.ResponseStatus
 import org.valiktor.ConstraintViolationException
 import org.valiktor.i18n.ConstraintViolationMessage
 import org.valiktor.i18n.mapToMessage
-import java.util.*
+import java.util.Locale
 
 @RestController
 class ValiktorController {
 
     @PostMapping("/api/valiktor")
     fun validatePerson(@RequestBody person: Person): ResponseEntity<Person> {
-
         return ResponseEntity.status(HttpStatus.OK).body(person)
     }
 
