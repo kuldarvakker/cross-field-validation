@@ -47,7 +47,7 @@ class YaviControllerTest(@Autowired private val mockMvc: MockMvc) {
                       "message": "The size of \"firstName\" must be less than or equal to 4. The given size is 6"
                     },
                     {
-                      "field": "phoneNumber",
+                      "field": "atLeastPhoneOrEmailPresent",
                       "message": "Phone or Email must be present"
                     },
                     {
