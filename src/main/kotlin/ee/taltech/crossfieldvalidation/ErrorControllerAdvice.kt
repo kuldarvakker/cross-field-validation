@@ -2,6 +2,7 @@ package ee.taltech.crossfieldvalidation
 
 import com.fasterxml.jackson.core.JsonParseException
 import com.fasterxml.jackson.databind.JsonMappingException
+import com.fasterxml.jackson.databind.exc.InvalidTypeIdException
 import com.fasterxml.jackson.databind.exc.MismatchedInputException
 import org.springframework.http.HttpStatus
 import org.springframework.http.converter.HttpMessageNotReadableException
@@ -20,7 +21,11 @@ class ErrorControllerAdvice {
         if (cause is JsonParseException) {
             val jpe: JsonParseException = cause
             msg = jpe.originalMessage
-        } else if (cause is MismatchedInputException) {
+        } else if (cause is InvalidTypeIdException) {
+            val itie: InvalidTypeIdException = cause
+            msg = itie.originalMessage
+        }
+        else if (cause is MismatchedInputException) {
             val mie = cause
             msg = if (mie.path != null && mie.path.size > 0) {
                 "Invalid request field: " + mie.path[0].fieldName
