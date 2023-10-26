@@ -1,9 +1,8 @@
-package ee.taltech.crossfieldvalidation.hibernate.model.attributes
+package ee.taltech.crossfieldvalidation.common.model.attributes
+
 import com.fasterxml.jackson.annotation.JsonProperty
 
-enum class Units {
-    @JsonProperty(value = "kg")
-    KG,
+enum class HeightUnits {
     @JsonProperty(value = "m")
     M,
     @JsonProperty(value = "cm")

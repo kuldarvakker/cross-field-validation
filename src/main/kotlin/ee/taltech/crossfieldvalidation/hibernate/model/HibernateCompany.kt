@@ -1,5 +1,6 @@
 package ee.taltech.crossfieldvalidation.hibernate.model
 
+import ee.taltech.crossfieldvalidation.common.model.PersonType
 import jakarta.validation.constraints.Size
 
 data class HibernateCompany(

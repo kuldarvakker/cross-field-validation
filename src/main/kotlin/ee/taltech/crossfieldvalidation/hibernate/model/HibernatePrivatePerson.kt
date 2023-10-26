@@ -1,6 +1,7 @@
 package ee.taltech.crossfieldvalidation.hibernate.model
 
 import com.fasterxml.jackson.annotation.JsonIgnore
+import ee.taltech.crossfieldvalidation.common.model.PersonType
 import ee.taltech.crossfieldvalidation.hibernate.model.attributes.HibernateAddress
 import ee.taltech.crossfieldvalidation.hibernate.model.attributes.HibernateHeight
 import ee.taltech.crossfieldvalidation.hibernate.model.attributes.HibernateWeight
