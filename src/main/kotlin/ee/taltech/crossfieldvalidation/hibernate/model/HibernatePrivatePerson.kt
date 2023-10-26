@@ -18,9 +18,8 @@ data class HibernatePrivatePerson(
     @field:Size(min = 5, max = 10)
     val lastName: String,
     @field:Size(max = 10)
-    // @field:Max(value = 10) fails the test
     val phoneNumber: String?,
-    val emails: List<String>?,
+    val emails: List<@Size(max = 1) String>?,
     @field:Valid
     val address: HibernateAddress,
     @field:Valid
