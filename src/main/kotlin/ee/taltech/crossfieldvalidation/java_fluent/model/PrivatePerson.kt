@@ -1,5 +1,6 @@
 package ee.taltech.crossfieldvalidation.java_fluent.model
 
+import ee.taltech.crossfieldvalidation.common.model.PersonType
 import ee.taltech.crossfieldvalidation.java_fluent.model.attributes.Address
 import ee.taltech.crossfieldvalidation.java_fluent.model.attributes.Height
 import ee.taltech.crossfieldvalidation.java_fluent.model.attributes.Weight

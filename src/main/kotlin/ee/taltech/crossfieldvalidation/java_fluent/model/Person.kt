@@ -2,6 +2,7 @@ package ee.taltech.crossfieldvalidation.java_fluent.model
 
 import com.fasterxml.jackson.annotation.JsonSubTypes
 import com.fasterxml.jackson.annotation.JsonTypeInfo
+import ee.taltech.crossfieldvalidation.common.model.PersonType
 import jakarta.validation.executable.ValidateOnExecution
 
 @ValidateOnExecution

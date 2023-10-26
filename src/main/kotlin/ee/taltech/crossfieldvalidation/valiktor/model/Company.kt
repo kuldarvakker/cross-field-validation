@@ -1,5 +1,6 @@
 package ee.taltech.crossfieldvalidation.valiktor.model
 
+import ee.taltech.crossfieldvalidation.common.model.PersonType
 import org.valiktor.functions.hasSize
 import org.valiktor.functions.isNotNull
 import org.valiktor.validate

@@ -3,9 +3,9 @@ package ee.taltech.crossfieldvalidation.java_fluent
 import br.com.fluentvalidator.Validator
 import ee.taltech.crossfieldvalidation.ValidationError
 import ee.taltech.crossfieldvalidation.ValidationErrors
+import ee.taltech.crossfieldvalidation.common.model.PersonType
 import ee.taltech.crossfieldvalidation.java_fluent.model.Company
 import ee.taltech.crossfieldvalidation.java_fluent.model.Person
-import ee.taltech.crossfieldvalidation.java_fluent.model.PersonType
 import ee.taltech.crossfieldvalidation.java_fluent.model.PrivatePerson
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity

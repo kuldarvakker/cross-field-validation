@@ -5,8 +5,8 @@ import br.com.fluentvalidator.predicate.ComparablePredicate.equalTo
 import br.com.fluentvalidator.predicate.LogicalPredicate.not
 import br.com.fluentvalidator.predicate.ObjectPredicate.nullValue
 import br.com.fluentvalidator.predicate.StringPredicate.stringSizeBetween
+import ee.taltech.crossfieldvalidation.common.model.PersonType
 import ee.taltech.crossfieldvalidation.java_fluent.model.Company
-import ee.taltech.crossfieldvalidation.java_fluent.model.PersonType
 
 class CompanyValidator : AbstractValidator<Company> {
 

@@ -1,6 +1,7 @@
 package ee.taltech.crossfieldvalidation.konform.model
 
 import ee.taltech.crossfieldvalidation.checkNumericValueBounds
+import ee.taltech.crossfieldvalidation.common.model.PersonType
 import ee.taltech.crossfieldvalidation.konform.model.attributes.Address
 import ee.taltech.crossfieldvalidation.konform.model.attributes.Height
 import ee.taltech.crossfieldvalidation.konform.model.attributes.Weight

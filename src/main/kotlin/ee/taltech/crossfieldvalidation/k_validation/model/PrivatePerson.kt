@@ -1,5 +1,6 @@
 package ee.taltech.crossfieldvalidation.k_validation.model
 
+import ee.taltech.crossfieldvalidation.common.model.PersonType
 import ee.taltech.crossfieldvalidation.k_validation.model.attributes.Address
 import ee.taltech.crossfieldvalidation.k_validation.model.attributes.Length
 import ee.taltech.crossfieldvalidation.k_validation.model.attributes.Weight

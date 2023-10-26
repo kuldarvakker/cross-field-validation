@@ -4,6 +4,7 @@ import am.ik.yavi.builder.ValidatorBuilder
 import am.ik.yavi.builder.validator
 import am.ik.yavi.core.ViolationMessage
 import ee.taltech.crossfieldvalidation.checkNumericValueBounds
+import ee.taltech.crossfieldvalidation.common.model.PersonType
 import ee.taltech.crossfieldvalidation.yavi.model.attributes.Address
 import ee.taltech.crossfieldvalidation.yavi.model.attributes.Height
 import ee.taltech.crossfieldvalidation.yavi.model.attributes.Weight

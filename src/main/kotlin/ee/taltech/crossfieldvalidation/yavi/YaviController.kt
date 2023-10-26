@@ -2,12 +2,12 @@ package ee.taltech.crossfieldvalidation.yavi
 
 import ee.taltech.crossfieldvalidation.ValidationError
 import ee.taltech.crossfieldvalidation.ValidationErrors
+import ee.taltech.crossfieldvalidation.common.model.PersonType
 import ee.taltech.crossfieldvalidation.yavi.model.privatePersonValidator
 import ee.taltech.crossfieldvalidation.yavi.model.companyValidator
 import ee.taltech.crossfieldvalidation.yavi.model.Person
 import ee.taltech.crossfieldvalidation.yavi.model.Company
 import ee.taltech.crossfieldvalidation.yavi.model.PrivatePerson
-import ee.taltech.crossfieldvalidation.yavi.model.PersonType
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity

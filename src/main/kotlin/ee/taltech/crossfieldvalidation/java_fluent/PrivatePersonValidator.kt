@@ -6,7 +6,7 @@ import br.com.fluentvalidator.predicate.LogicalPredicate.not
 import br.com.fluentvalidator.predicate.ObjectPredicate.nullValue
 import br.com.fluentvalidator.predicate.StringPredicate.stringSizeGreaterThanOrEqual
 import br.com.fluentvalidator.predicate.StringPredicate.stringSizeBetween
-import ee.taltech.crossfieldvalidation.java_fluent.model.PersonType
+import ee.taltech.crossfieldvalidation.common.model.PersonType
 import ee.taltech.crossfieldvalidation.java_fluent.model.PrivatePerson
 
 class PrivatePersonValidator : AbstractValidator<PrivatePerson> {

@@ -2,9 +2,9 @@ package ee.taltech.crossfieldvalidation.konform
 
 import ee.taltech.crossfieldvalidation.ValidationError
 import ee.taltech.crossfieldvalidation.ValidationErrors
+import ee.taltech.crossfieldvalidation.common.model.PersonType
 import ee.taltech.crossfieldvalidation.konform.model.Company
 import ee.taltech.crossfieldvalidation.konform.model.Person
-import ee.taltech.crossfieldvalidation.konform.model.PersonType
 import ee.taltech.crossfieldvalidation.konform.model.PrivatePerson
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
