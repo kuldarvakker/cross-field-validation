@@ -2,16 +2,16 @@ package ee.taltech.crossfieldvalidation.java_fluent.model
 
 import ee.taltech.crossfieldvalidation.common.model.PersonType
 import ee.taltech.crossfieldvalidation.java_fluent.model.attributes.Address
-import ee.taltech.crossfieldvalidation.java_fluent.model.attributes.Height
-import ee.taltech.crossfieldvalidation.java_fluent.model.attributes.Weight
+import ee.taltech.crossfieldvalidation.java_fluent.model.attributes.JavaFluentHeight
+import ee.taltech.crossfieldvalidation.java_fluent.model.attributes.JavaFluentWeight
 
-data class PrivatePerson(
+data class JavaFluentPrivatePerson(
     override val type: PersonType = PersonType.PRIVATE,
     val firstName: String,
     val lastName: String,
     val phoneNumber: String?,
     val emails: List<String>?,
     val address: Address,
-    val height: Height,
-    val weight: Weight
-) : Person()
+    val height: JavaFluentHeight,
+    val weight: JavaFluentWeight
+) : JavaFluentPerson()

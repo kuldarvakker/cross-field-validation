@@ -8,9 +8,9 @@ import jakarta.validation.executable.ValidateOnExecution
 @ValidateOnExecution
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY, property = "type")
 @JsonSubTypes(
-    JsonSubTypes.Type(value = PrivatePerson::class, name = "PRIVATE"),
-    JsonSubTypes.Type(value = Company::class, name = "COMPANY")
+    JsonSubTypes.Type(value = JavaFluentPrivatePerson::class, name = "PRIVATE"),
+    JsonSubTypes.Type(value = JavaFluentCompany::class, name = "COMPANY")
 )
-sealed class Person {
+sealed class JavaFluentPerson {
     abstract val type: PersonType
 }

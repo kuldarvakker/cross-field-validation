@@ -4,9 +4,9 @@ import br.com.fluentvalidator.Validator
 import ee.taltech.crossfieldvalidation.ValidationError
 import ee.taltech.crossfieldvalidation.ValidationErrors
 import ee.taltech.crossfieldvalidation.common.model.PersonType
-import ee.taltech.crossfieldvalidation.java_fluent.model.Company
-import ee.taltech.crossfieldvalidation.java_fluent.model.Person
-import ee.taltech.crossfieldvalidation.java_fluent.model.PrivatePerson
+import ee.taltech.crossfieldvalidation.java_fluent.model.JavaFluentCompany
+import ee.taltech.crossfieldvalidation.java_fluent.model.JavaFluentPerson
+import ee.taltech.crossfieldvalidation.java_fluent.model.JavaFluentPrivatePerson
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.RestController
@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.RequestBody
 @RestController
 class JavaFluentController {
 
-    private final val privatePersonValidator: Validator<PrivatePerson> = PrivatePersonValidator()
-    private final val companyValidator: Validator<Company> = CompanyValidator()
+    private final val privatePersonValidator: Validator<JavaFluentPrivatePerson> = JavaFluentPrivatePersonValidator()
+    private final val companyValidator: Validator<JavaFluentCompany> = JavaFluentCompanyValidator()
 
     @PostMapping("/api/java_fluent")
-    fun validatePerson(@RequestBody person: Person): ResponseEntity<*> {
+    fun validatePerson(@RequestBody person: JavaFluentPerson): ResponseEntity<*> {
         val validationErrors = validate(person)
 
         return if (validationErrors.errors.isEmpty()) {
@@ -30,10 +30,10 @@ class JavaFluentController {
         }
     }
 
-    private fun validate(person: Person): ValidationErrors {
+    private fun validate(person: JavaFluentPerson): ValidationErrors {
         val results = when (person.type) {
-            PersonType.PRIVATE -> privatePersonValidator.validate(person as PrivatePerson)
-            PersonType.COMPANY -> companyValidator.validate(person as Company)
+            PersonType.PRIVATE -> privatePersonValidator.validate(person as JavaFluentPrivatePerson)
+            PersonType.COMPANY -> companyValidator.validate(person as JavaFluentCompany)
         }
         return if (!results.isValid) {
             val errors = results.errors.map {

@@ -7,23 +7,23 @@ import br.com.fluentvalidator.predicate.ObjectPredicate.nullValue
 import br.com.fluentvalidator.predicate.StringPredicate.stringSizeGreaterThanOrEqual
 import br.com.fluentvalidator.predicate.StringPredicate.stringSizeBetween
 import ee.taltech.crossfieldvalidation.common.model.PersonType
-import ee.taltech.crossfieldvalidation.java_fluent.model.PrivatePerson
+import ee.taltech.crossfieldvalidation.java_fluent.model.JavaFluentPrivatePerson
 
-class PrivatePersonValidator : AbstractValidator<PrivatePerson> {
+class JavaFluentPrivatePersonValidator : AbstractValidator<JavaFluentPrivatePerson> {
 
     constructor() : super()
 
     override fun rules() {
         setPropertyOnContext("person")
 
-        ruleFor(PrivatePerson::type)
+        ruleFor(JavaFluentPrivatePerson::type)
             .must(equalTo(PersonType.PRIVATE))
             .`when`(not(nullValue()))
             .withMessage("person type must be PRIVATE")
-            .withFieldName(PrivatePerson::type.name)
+            .withFieldName(JavaFluentPrivatePerson::type.name)
             .critical()
 
-        ruleFor(PrivatePerson::firstName)
+        ruleFor(JavaFluentPrivatePerson::firstName)
             .must(not(nullValue()))
             .withMessage("first name cannot be null")
             .withFieldName("firstName")
@@ -31,19 +31,19 @@ class PrivatePersonValidator : AbstractValidator<PrivatePerson> {
             .withMessage("size must be between 2 and 4")
             .withFieldName("firstName")
 
-        ruleFor(PrivatePerson::lastName)
+        ruleFor(JavaFluentPrivatePerson::lastName)
             .must(not(nullValue()))
             .withMessage("last name cannot be null")
             .withFieldName("lastName")
             .must(stringSizeBetween(5,10))
             .withMessage("lastName is not between size 5 and 10")
 
-        ruleFor(PrivatePerson::phoneNumber)
+        ruleFor(JavaFluentPrivatePerson::phoneNumber)
             .must(stringSizeBetween(1,10))
             .`when`(not(nullValue()))
             .withMessage("phoneNumber can be max length of 10")
 
-        ruleFor(PrivatePerson::address)
+        ruleFor(JavaFluentPrivatePerson::address)
             .must(not(nullValue()))
             .withMessage("address cannot be null")
 
