@@ -1,4 +1,4 @@
-package ee.taltech.crossfieldvalidation.yavi.model
+package ee.taltech.crossfieldvalidation.valiktor.model
 
 import com.fasterxml.jackson.annotation.JsonSubTypes
 import com.fasterxml.jackson.annotation.JsonTypeInfo
@@ -8,9 +8,9 @@ import jakarta.validation.executable.ValidateOnExecution
 @ValidateOnExecution
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY, property = "type")
 @JsonSubTypes(
-    JsonSubTypes.Type(value = PrivatePerson::class, name = "PRIVATE"),
-    JsonSubTypes.Type(value = Company::class, name = "COMPANY")
+    JsonSubTypes.Type(value = ValiktorPrivatePerson::class, name = "PRIVATE"),
+    JsonSubTypes.Type(value = ValiktorCompany::class, name = "COMPANY")
 )
-sealed class Person {
+sealed class ValiktorPerson {
     abstract val type: PersonType
 }

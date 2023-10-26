@@ -5,13 +5,13 @@ import org.valiktor.functions.hasSize
 import org.valiktor.functions.isNotNull
 import org.valiktor.validate
 
-data class Company(
+data class ValiktorCompany(
     override val type: PersonType = PersonType.COMPANY,
     val name: String,
-) : Person() {
+) : ValiktorPerson() {
     init {
         validate(this) {
-            validate(Company::name).isNotNull()
+            validate(ValiktorCompany::name).isNotNull()
                 .hasSize(min = 2, max = 4)
         }
     }

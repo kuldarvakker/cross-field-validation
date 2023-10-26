@@ -1,5 +1,5 @@
-package ee.taltech.crossfieldvalidation.yavi.model.attributes
-data class Address(
+package ee.taltech.crossfieldvalidation.valiktor.model.attributes
+data class ValiktorAddress(
     val street: String,
     val city: String,
     val state: String,

@@ -3,13 +3,13 @@ package ee.taltech.crossfieldvalidation.yavi.model
 import am.ik.yavi.builder.validator
 import ee.taltech.crossfieldvalidation.common.model.PersonType
 
-data class Company(
+data class YaviCompany(
     override val type: PersonType = PersonType.COMPANY,
     val name: String,
-) : Person()
+) : YaviPerson()
 
-val companyValidator = validator<Company> {
-    Company::name {
+val yaviCompanyValidator = validator<YaviCompany> {
+    YaviCompany::name {
         notNull()
         greaterThanOrEqual(2)
         lessThanOrEqual(4)
