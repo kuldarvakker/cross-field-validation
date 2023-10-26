@@ -27,7 +27,7 @@ data class HibernatePrivatePerson(
     val height: HibernateHeight,
     @field:Valid
     val weight: HibernateWeight
-) : Person() {
+) : HibernatePerson() {
 
     @JsonIgnore
     @AssertTrue(message = "Phone or Email must be present")

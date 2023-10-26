@@ -10,6 +10,6 @@ import ee.taltech.crossfieldvalidation.common.model.PersonType
     JsonSubTypes.Type(value = HibernatePrivatePerson::class, name = "PRIVATE"),
     JsonSubTypes.Type(value = HibernateCompany::class, name = "COMPANY")
 )
-sealed class Person {
+sealed class HibernatePerson {
     abstract val type: PersonType
 }
