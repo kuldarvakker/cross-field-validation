@@ -6,9 +6,9 @@ import ee.taltech.crossfieldvalidation.common.model.PersonType
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY, property = "type")
 @JsonSubTypes(
-    JsonSubTypes.Type(value = PrivatePerson::class, name = "PRIVATE"),
-    JsonSubTypes.Type(value = Company::class, name = "COMPANY")
+    JsonSubTypes.Type(value = KonformPrivatePerson::class, name = "PRIVATE"),
+    JsonSubTypes.Type(value = KonformCompany::class, name = "COMPANY")
 )
-sealed class Person {
+sealed class KonformPerson {
     abstract val type: PersonType
 }

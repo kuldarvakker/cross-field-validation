@@ -2,9 +2,9 @@ package ee.taltech.crossfieldvalidation.konform.model
 
 import ee.taltech.crossfieldvalidation.checkNumericValueBounds
 import ee.taltech.crossfieldvalidation.common.model.PersonType
-import ee.taltech.crossfieldvalidation.konform.model.attributes.Address
-import ee.taltech.crossfieldvalidation.konform.model.attributes.Height
-import ee.taltech.crossfieldvalidation.konform.model.attributes.Weight
+import ee.taltech.crossfieldvalidation.konform.model.attributes.KonformAddress
+import ee.taltech.crossfieldvalidation.konform.model.attributes.KonformHeight
+import ee.taltech.crossfieldvalidation.konform.model.attributes.KonformWeight
 
 import io.konform.validation.Validation
 import io.konform.validation.jsonschema.enum
@@ -12,50 +12,50 @@ import io.konform.validation.jsonschema.maxLength
 import io.konform.validation.jsonschema.minItems
 import io.konform.validation.jsonschema.minLength
 
-data class PrivatePerson(
+data class KonformPrivatePerson(
     override val type: PersonType = PersonType.PRIVATE,
     val firstName: String,
     val lastName: String,
     val phoneNumber: String?,
     val emails: List<String>?,
-    val address: Address,
-    val height: Height,
-    val weight: Weight
-) : Person() {
+    val address: KonformAddress,
+    val height: KonformHeight,
+    val weight: KonformWeight
+) : KonformPerson() {
 
     companion object {
-        val validate = Validation<PrivatePerson> {
-            PrivatePerson::type required { enum(PersonType.PRIVATE) }
-            PrivatePerson::firstName required {
+        val validate = Validation<KonformPrivatePerson> {
+            KonformPrivatePerson::type required { enum(PersonType.PRIVATE) }
+            KonformPrivatePerson::firstName required {
                 minLength(2)
                 maxLength(4)
             }
-            PrivatePerson::lastName required {
+            KonformPrivatePerson::lastName required {
                 minLength(5)
                 maxLength(10)
             }
-            PrivatePerson::phoneNumber ifPresent {
+            KonformPrivatePerson::phoneNumber ifPresent {
                 maxLength(10)
             }
-            PrivatePerson::emails ifPresent {
+            KonformPrivatePerson::emails ifPresent {
                 minItems(0)
             }
-            PrivatePerson::address required {
-                Address::city required { minLength(2) }
-                Address::state required { minLength(2) }
-                Address::street required { minLength(2) }
-                Address::postalCode required { minLength(2) }
-                Address::country required { minLength(2) }
+            KonformPrivatePerson::address required {
+                KonformAddress::city required { minLength(2) }
+                KonformAddress::state required { minLength(2) }
+                KonformAddress::street required { minLength(2) }
+                KonformAddress::postalCode required { minLength(2) }
+                KonformAddress::country required { minLength(2) }
             }
-            PrivatePerson::weight required {
-                Weight::value required {
+            KonformPrivatePerson::weight required {
+                KonformWeight::value required {
                     addConstraint("numeric value out of bounds (<3 digits>.<2 digits> expected)") {
                         checkNumericValueBounds(it, 3,2)
                     }
                 }
             }
-            PrivatePerson::height required {
-                Height::value required {
+            KonformPrivatePerson::height required {
+                KonformHeight::value required {
                     addConstraint("numeric value out of bounds (<3 digits>.<2 digits> expected)") {
                         checkNumericValueBounds(it, 3,2)
                     }

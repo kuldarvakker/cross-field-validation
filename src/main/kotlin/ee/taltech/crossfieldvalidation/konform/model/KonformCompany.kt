@@ -6,14 +6,14 @@ import io.konform.validation.jsonschema.enum
 import io.konform.validation.jsonschema.maxLength
 import io.konform.validation.jsonschema.minLength
 
-data class Company(
+data class KonformCompany(
     override val type: PersonType = PersonType.COMPANY,
     val name: String
-) : Person() {
+) : KonformPerson() {
     companion object {
-        val validate = Validation<Company> {
-            Company::type required { enum(PersonType.COMPANY) }
-            Company::name required {
+        val validate = Validation<KonformCompany> {
+            KonformCompany::type required { enum(PersonType.COMPANY) }
+            KonformCompany::name required {
                 minLength(2)
                 maxLength(4)
             }
