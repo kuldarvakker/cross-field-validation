@@ -6,8 +6,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY, property = "type")
 @JsonSubTypes(
-    JsonSubTypes.Type(value = PrivatePerson::class, name = "PRIVATE"),
-    JsonSubTypes.Type(value = Company::class, name = "COMPANY")
+    JsonSubTypes.Type(value = HibernatePrivatePerson::class, name = "PRIVATE"),
+    JsonSubTypes.Type(value = HibernateCompany::class, name = "COMPANY")
 )
 sealed class Person {
     abstract val type: PersonType

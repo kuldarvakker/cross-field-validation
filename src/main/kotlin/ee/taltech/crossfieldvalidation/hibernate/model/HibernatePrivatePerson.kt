@@ -1,15 +1,15 @@
 package ee.taltech.crossfieldvalidation.hibernate.model
 
 import com.fasterxml.jackson.annotation.JsonIgnore
-import ee.taltech.crossfieldvalidation.hibernate.model.attributes.Address
-import ee.taltech.crossfieldvalidation.hibernate.model.attributes.Height
-import ee.taltech.crossfieldvalidation.hibernate.model.attributes.Weight
+import ee.taltech.crossfieldvalidation.hibernate.model.attributes.HibernateAddress
+import ee.taltech.crossfieldvalidation.hibernate.model.attributes.HibernateHeight
+import ee.taltech.crossfieldvalidation.hibernate.model.attributes.HibernateWeight
 import jakarta.validation.Valid
 import jakarta.validation.constraints.AssertTrue
 import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Size
 
-data class PrivatePerson(
+data class HibernatePrivatePerson(
     @field:NotNull
     override val type: PersonType = PersonType.PRIVATE,
     @field:Size(min = 2, max = 4)
@@ -21,11 +21,11 @@ data class PrivatePerson(
     val phoneNumber: String?,
     val emails: List<String>?,
     @field:Valid
-    val address: Address,
+    val address: HibernateAddress,
     @field:Valid
-    val height: Height,
+    val height: HibernateHeight,
     @field:Valid
-    val weight: Weight
+    val weight: HibernateWeight
 ) : Person() {
 
     @JsonIgnore

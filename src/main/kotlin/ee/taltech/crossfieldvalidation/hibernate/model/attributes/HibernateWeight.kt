@@ -5,7 +5,7 @@ import org.springframework.validation.annotation.Validated
 import java.math.BigDecimal
 
 @Validated
-data class Weight(
+data class HibernateWeight(
     @field:Digits(integer = 3, fraction = 2)
     val value: BigDecimal,
     val unit: Units

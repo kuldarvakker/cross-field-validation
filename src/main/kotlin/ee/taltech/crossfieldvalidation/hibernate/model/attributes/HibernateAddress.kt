@@ -4,7 +4,7 @@ import jakarta.validation.constraints.Size
 import org.springframework.validation.annotation.Validated
 
 @Validated
-data class Address(
+data class HibernateAddress(
     @field:Size(min = 2)
     val street: String,
     @field:Size(min = 2)
