@@ -8,15 +8,24 @@ import ee.taltech.crossfieldvalidation.common.model.PersonType
 import ee.taltech.crossfieldvalidation.yavi.model.attributes.YaviAddress
 import ee.taltech.crossfieldvalidation.yavi.model.attributes.YaviHeight
 import ee.taltech.crossfieldvalidation.yavi.model.attributes.YaviWeight
+import io.swagger.v3.oas.annotations.media.Schema
 
 data class YaviPrivatePerson(
+    @field:Schema(allowableValues = ["PRIVATE"])
     override val type: PersonType = PersonType.PRIVATE,
+    @field:Schema(example = "Mari", minLength = 2, maxLength = 4)
     val firstName: String,
+    @field:Schema(example = "Maasikas", minLength = 5, maxLength = 10)
     val lastName: String,
+    @field:Schema(example = "+37254541010", maxLength = 10)
     val phoneNumber: String?,
+    @field:Schema(example = """["email@taltech.ee", "email2@taltech.ee"]""") // TODO define list elem size
     val emails: List<String>?,
+    @field:Schema(description = "Person's address")
     val address: YaviAddress,
+    @field:Schema(description = "Person's height")
     val height: YaviHeight,
+    @field:Schema(description = "Person's weight")
     val weight: YaviWeight
 ) : YaviPerson()
 
