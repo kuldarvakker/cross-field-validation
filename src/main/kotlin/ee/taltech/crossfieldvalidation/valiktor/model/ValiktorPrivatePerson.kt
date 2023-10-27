@@ -6,6 +6,7 @@ import ee.taltech.crossfieldvalidation.valiktor.model.attributes.ValiktorAddress
 import ee.taltech.crossfieldvalidation.valiktor.model.attributes.ValiktorHeight
 import ee.taltech.crossfieldvalidation.valiktor.model.attributes.ValiktorWeight
 import ee.taltech.crossfieldvalidation.valiktor.withMessage
+import io.swagger.v3.oas.annotations.media.Schema
 import org.valiktor.validate
 import org.valiktor.functions.hasSize
 import org.valiktor.functions.isValid
@@ -13,13 +14,21 @@ import org.valiktor.functions.validate
 
 
 data class ValiktorPrivatePerson(
+    @field:Schema(allowableValues = ["PRIVATE"])
     override val type: PersonType = PersonType.PRIVATE,
+    @field:Schema(example = "Mari", minLength = 2, maxLength = 4)
     val firstName: String,
+    @field:Schema(example = "Maasikas", minLength = 5, maxLength = 10)
     val lastName: String,
+    @field:Schema(example = "+37254541010", maxLength = 10)
     val phoneNumber: String?,
+    @field:Schema(example = """["email@taltech.ee", "email2@taltech.ee"]""") // TODO define list elem size
     val emails: List<String>?,
+    @field:Schema(description = "Person's address")
     val address: ValiktorAddress,
+    @field:Schema(description = "Person's height")
     val height: ValiktorHeight,
+    @field:Schema(description = "Person's weight")
     val weight: ValiktorWeight
 ) : ValiktorPerson() {
     init {
