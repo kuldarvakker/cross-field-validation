@@ -36,15 +36,6 @@ class CheckDateIsAfterOrEqualsValidator : ConstraintValidator<CheckDateIsAfterOr
 
         val isValid = value.isAfter(localDate) || value.isEqual(localDate)
 
-        if (!isValid) {
-            val ctx = context.unwrap(HibernateConstraintValidatorContext::class.java)
-            with(localDate) {
-                ctx.addExpressionVariable("year", year)
-                ctx.addExpressionVariable("month", month)
-                ctx.addExpressionVariable("day", dayOfMonth)
-            }
-        }
-
         return isValid
     }
 }
