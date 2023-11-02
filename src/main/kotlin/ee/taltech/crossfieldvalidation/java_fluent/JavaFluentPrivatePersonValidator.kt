@@ -6,7 +6,7 @@ import br.com.fluentvalidator.predicate.LogicalPredicate.not
 import br.com.fluentvalidator.predicate.ObjectPredicate.nullValue
 import br.com.fluentvalidator.predicate.StringPredicate.stringSizeGreaterThanOrEqual
 import br.com.fluentvalidator.predicate.StringPredicate.stringSizeBetween
-import ee.taltech.crossfieldvalidation.common.model.PersonType
+import ee.taltech.crossfieldvalidation.common.model.ServiceProvider
 import ee.taltech.crossfieldvalidation.java_fluent.model.JavaFluentPrivatePerson
 
 class JavaFluentPrivatePersonValidator : AbstractValidator<JavaFluentPrivatePerson> {
@@ -17,7 +17,7 @@ class JavaFluentPrivatePersonValidator : AbstractValidator<JavaFluentPrivatePers
         setPropertyOnContext("person")
 
         ruleFor(JavaFluentPrivatePerson::type)
-            .must(equalTo(PersonType.PRIVATE))
+            .must(equalTo(ServiceProvider.PRIVATE))
             .`when`(not(nullValue()))
             .withMessage("person type must be PRIVATE")
             .withFieldName(JavaFluentPrivatePerson::type.name)

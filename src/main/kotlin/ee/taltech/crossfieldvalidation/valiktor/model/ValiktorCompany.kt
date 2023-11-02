@@ -1,6 +1,6 @@
 package ee.taltech.crossfieldvalidation.valiktor.model
 
-import ee.taltech.crossfieldvalidation.common.model.PersonType
+import ee.taltech.crossfieldvalidation.common.model.ServiceProvider
 import io.swagger.v3.oas.annotations.media.Schema
 import org.valiktor.functions.hasSize
 import org.valiktor.functions.isNotNull
@@ -8,7 +8,7 @@ import org.valiktor.validate
 
 data class ValiktorCompany(
     @field:Schema(allowableValues = ["COMPANY"])
-    override val type: PersonType = PersonType.COMPANY,
+    override val type: ServiceProvider = ServiceProvider.COMPANY,
     @field:Schema(description = "Company's name", example = "Maja Üks OÜ", minLength = 2, maxLength = 4)
     val name: String,
 ) : ValiktorPerson() {

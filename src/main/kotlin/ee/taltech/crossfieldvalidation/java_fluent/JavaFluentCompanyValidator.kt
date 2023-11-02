@@ -5,7 +5,7 @@ import br.com.fluentvalidator.predicate.ComparablePredicate.equalTo
 import br.com.fluentvalidator.predicate.LogicalPredicate.not
 import br.com.fluentvalidator.predicate.ObjectPredicate.nullValue
 import br.com.fluentvalidator.predicate.StringPredicate.stringSizeBetween
-import ee.taltech.crossfieldvalidation.common.model.PersonType
+import ee.taltech.crossfieldvalidation.common.model.ServiceProvider
 import ee.taltech.crossfieldvalidation.java_fluent.model.JavaFluentCompany
 
 class JavaFluentCompanyValidator : AbstractValidator<JavaFluentCompany> {
@@ -16,9 +16,9 @@ class JavaFluentCompanyValidator : AbstractValidator<JavaFluentCompany> {
         setPropertyOnContext("person")
 
         ruleFor(JavaFluentCompany::type)
-            .must(equalTo(PersonType.COMPANY))
+            .must(equalTo(ServiceProvider.COMPANY))
             .`when`(not(nullValue()))
-            .withMessage("person type must be ${PersonType.COMPANY.name}")
+            .withMessage("person type must be ${ServiceProvider.COMPANY.name}")
             .withFieldName(JavaFluentCompany::type.name)
             .critical()
 

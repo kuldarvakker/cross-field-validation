@@ -3,7 +3,7 @@ package ee.taltech.crossfieldvalidation.java_fluent
 import br.com.fluentvalidator.Validator
 import ee.taltech.crossfieldvalidation.ValidationError
 import ee.taltech.crossfieldvalidation.ValidationErrors
-import ee.taltech.crossfieldvalidation.common.model.PersonType
+import ee.taltech.crossfieldvalidation.common.model.ServiceProvider
 import ee.taltech.crossfieldvalidation.java_fluent.model.JavaFluentCompany
 import ee.taltech.crossfieldvalidation.java_fluent.model.JavaFluentPerson
 import ee.taltech.crossfieldvalidation.java_fluent.model.JavaFluentPrivatePerson
@@ -32,8 +32,8 @@ class JavaFluentController {
 
     private fun validate(person: JavaFluentPerson): ValidationErrors {
         val results = when (person.type) {
-            PersonType.PRIVATE -> privatePersonValidator.validate(person as JavaFluentPrivatePerson)
-            PersonType.COMPANY -> companyValidator.validate(person as JavaFluentCompany)
+            ServiceProvider.PRIVATE -> privatePersonValidator.validate(person as JavaFluentPrivatePerson)
+            ServiceProvider.COMPANY -> companyValidator.validate(person as JavaFluentCompany)
         }
         return if (!results.isValid) {
             val errors = results.errors.map {

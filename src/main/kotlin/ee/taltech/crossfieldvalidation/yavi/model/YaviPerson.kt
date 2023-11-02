@@ -2,7 +2,7 @@ package ee.taltech.crossfieldvalidation.yavi.model
 
 import com.fasterxml.jackson.annotation.JsonSubTypes
 import com.fasterxml.jackson.annotation.JsonTypeInfo
-import ee.taltech.crossfieldvalidation.common.model.PersonType
+import ee.taltech.crossfieldvalidation.common.model.ServiceProvider
 import jakarta.validation.executable.ValidateOnExecution
 
 @ValidateOnExecution
@@ -12,5 +12,5 @@ import jakarta.validation.executable.ValidateOnExecution
     JsonSubTypes.Type(value = YaviCompany::class, name = "COMPANY")
 )
 sealed class YaviPerson {
-    abstract val type: PersonType
+    abstract val type: ServiceProvider
 }

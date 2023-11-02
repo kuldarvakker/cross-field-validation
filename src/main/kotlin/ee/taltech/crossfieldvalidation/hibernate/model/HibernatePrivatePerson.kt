@@ -1,7 +1,7 @@
 package ee.taltech.crossfieldvalidation.hibernate.model
 
 import com.fasterxml.jackson.annotation.JsonIgnore
-import ee.taltech.crossfieldvalidation.common.model.PersonType
+import ee.taltech.crossfieldvalidation.common.model.ServiceProvider
 import ee.taltech.crossfieldvalidation.hibernate.model.attributes.HibernateAddress
 import ee.taltech.crossfieldvalidation.hibernate.model.attributes.HibernateHeight
 import ee.taltech.crossfieldvalidation.hibernate.model.attributes.HibernateWeight
@@ -14,7 +14,7 @@ import jakarta.validation.constraints.Size
 data class HibernatePrivatePerson(
     @field:Schema(allowableValues = ["PRIVATE"])
     @field:NotNull
-    override val type: PersonType = PersonType.PRIVATE,
+    override val type: ServiceProvider = ServiceProvider.PRIVATE,
     @field:Schema(example = "Mari")
     @field:Size(min = 2, max = 4)
     val firstName: String,

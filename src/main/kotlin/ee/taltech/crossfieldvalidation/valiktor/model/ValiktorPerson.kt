@@ -2,7 +2,7 @@ package ee.taltech.crossfieldvalidation.valiktor.model
 
 import com.fasterxml.jackson.annotation.JsonSubTypes
 import com.fasterxml.jackson.annotation.JsonTypeInfo
-import ee.taltech.crossfieldvalidation.common.model.PersonType
+import ee.taltech.crossfieldvalidation.common.model.ServiceProvider
 import jakarta.validation.executable.ValidateOnExecution
 
 @ValidateOnExecution
@@ -12,5 +12,5 @@ import jakarta.validation.executable.ValidateOnExecution
     JsonSubTypes.Type(value = ValiktorCompany::class, name = "COMPANY")
 )
 sealed class ValiktorPerson {
-    abstract val type: PersonType
+    abstract val type: ServiceProvider
 }
