@@ -2,8 +2,8 @@ package ee.taltech.crossfieldvalidation.common.model
 
 import io.swagger.v3.oas.annotations.media.Schema
 
-@Schema(type = "String", description = "Type of a person", allowableValues = [])
+@Schema(type = "String", description = "Provider of the service", allowableValues = [])
 enum class ServiceProvider {
-    PRIVATE,
-    COMPANY
+    COMPANY_A,
+    COMPANY_B
 }
