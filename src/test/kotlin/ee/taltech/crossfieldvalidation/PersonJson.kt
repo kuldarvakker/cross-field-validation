@@ -2,28 +2,14 @@ package ee.taltech.crossfieldvalidation
 
 object PersonJson {
 
-    val validPerson = """
+    val validCompanyAForm = """
         {
-            "type": "PRIVATE",
-            "firstName": "Mari",
-            "lastName": "Maasikas",
-            "phoneNumber": "372123456",
-            "emails": ["email@email.ee"],
-            "address": {
-                "street": "Street",
-                "city": "City",
-                "state": "State",
-                "country": "EE",
-                "postalCode": "Ab"
-            },
-            "height": {
-                "value": 180.0,
-                "unit": "cm"
-            },
-            "weight": {
-                "value": 80.0,
-                "unit": "kg"
-            }
+          "agency": "COMPANY_A",
+          "firstName": "Mari",
+          "lastName": "Maasikas",
+          "birthDate": "2019-08-24",
+          "phoneNumber": "+372123456789",
+          "email": "email@email.ee"
         }
     """.trimIndent()
 
