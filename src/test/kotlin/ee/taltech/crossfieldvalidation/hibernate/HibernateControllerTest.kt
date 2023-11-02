@@ -18,7 +18,7 @@ class HibernateControllerTest(@Autowired private val mockMvc: MockMvc) {
     private val url = "/api/hibernate"
 
     @Test
-    fun `validatePerson - success`() {
+    fun `validateCompanyAForm - success`() {
         mockMvc.post(url) {
             contentType = MediaType.APPLICATION_JSON
             content = PersonJson.validCompanyAForm
@@ -32,6 +32,37 @@ class HibernateControllerTest(@Autowired private val mockMvc: MockMvc) {
     }
 
     @Test
+    fun `validateCompanyAForm - failure`() {
+        mockMvc.post(url) {
+            contentType = MediaType.APPLICATION_JSON
+            content = PersonJson.invalidCompanyAForm
+            accept = MediaType.APPLICATION_JSON
+        }.andDo {
+            MockMvcResultHandlers.print()
+        }.andExpect {
+            status { isBadRequest() }
+            content { json("""
+                {
+                  "errors": [
+                    {
+                      "field": "birthDate",
+                      "message": "Date must be after or equals to 2000-1-1"
+                    },
+                    {
+                      "field": "phoneNumber",
+                      "message": "phoneNumber or email must be present"
+                    },
+                    {
+                      "field": "firstName",
+                      "message": "size must be between 1 and 128"
+                    }
+                  ]
+                }
+            """.trimIndent()) }
+        }
+    }
+
+    @Test
     fun `validatePerson - failure`() {
         mockMvc.post(url) {
             contentType = MediaType.APPLICATION_JSON
@@ -39,7 +70,9 @@ class HibernateControllerTest(@Autowired private val mockMvc: MockMvc) {
             accept = MediaType.APPLICATION_JSON
         }.andExpect {
             status { isBadRequest() }
-            content { json("""
+            content {
+                json(
+                    """
                     {
                       "errors": [
                         {
@@ -95,7 +128,8 @@ class HibernateControllerTest(@Autowired private val mockMvc: MockMvc) {
         }.andExpect {
             status { isBadRequest() }
             content {
-                json("""
+                json(
+                    """
                     {
                       "errors": [
                         {

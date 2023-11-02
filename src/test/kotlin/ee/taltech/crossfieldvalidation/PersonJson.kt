@@ -13,6 +13,15 @@ object PersonJson {
         }
     """.trimIndent()
 
+    val invalidCompanyAForm = """
+        {
+          "agency": "COMPANY_A",
+          "firstName": "",
+          "lastName": "Maasikas",
+          "birthDate": "1999-01-01"
+        }
+    """.trimIndent()
+
     val invalidPerson = """
         {
             "type": "PRIVATE",
