@@ -1,7 +1,7 @@
 package ee.taltech.crossfieldvalidation.konform.model
 
 import ee.taltech.crossfieldvalidation.checkNumericValueBounds
-import ee.taltech.crossfieldvalidation.common.model.ServiceProvider
+import ee.taltech.crossfieldvalidation.common.model.Agency
 import ee.taltech.crossfieldvalidation.konform.model.attributes.KonformAddress
 import ee.taltech.crossfieldvalidation.konform.model.attributes.KonformHeight
 import ee.taltech.crossfieldvalidation.konform.model.attributes.KonformWeight
@@ -15,7 +15,7 @@ import io.swagger.v3.oas.annotations.media.Schema
 
 data class KonformPrivatePerson(
     @field:Schema(allowableValues = ["PRIVATE"])
-    override val type: ServiceProvider = ServiceProvider.PRIVATE,
+    override val type: Agency = Agency.PRIVATE,
     @field:Schema(example = "Mari", minLength = 2, maxLength = 4)
     val firstName: String,
     @field:Schema(example = "Maasikas", minLength = 5, maxLength = 10)
@@ -34,7 +34,7 @@ data class KonformPrivatePerson(
 
     companion object {
         val validate = Validation<KonformPrivatePerson> {
-            KonformPrivatePerson::type required { enum(ServiceProvider.PRIVATE) }
+            KonformPrivatePerson::type required { enum(Agency.PRIVATE) }
             KonformPrivatePerson::firstName required {
                 minLength(2)
                 maxLength(4)

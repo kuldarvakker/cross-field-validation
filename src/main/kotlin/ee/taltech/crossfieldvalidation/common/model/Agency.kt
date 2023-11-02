@@ -3,7 +3,7 @@ package ee.taltech.crossfieldvalidation.common.model
 import io.swagger.v3.oas.annotations.media.Schema
 
 @Schema(type = "String", description = "Provider of the service", allowableValues = [])
-enum class ServiceProvider {
+enum class Agency {
     COMPANY_A,
     COMPANY_B
 }

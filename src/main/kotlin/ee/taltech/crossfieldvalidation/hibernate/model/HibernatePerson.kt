@@ -2,7 +2,7 @@ package ee.taltech.crossfieldvalidation.hibernate.model
 
 import com.fasterxml.jackson.annotation.JsonSubTypes
 import com.fasterxml.jackson.annotation.JsonTypeInfo
-import ee.taltech.crossfieldvalidation.common.model.ServiceProvider
+import ee.taltech.crossfieldvalidation.common.model.Agency
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY, property = "type")
 @JsonSubTypes(
@@ -10,5 +10,5 @@ import ee.taltech.crossfieldvalidation.common.model.ServiceProvider
     JsonSubTypes.Type(value = HibernateCompany::class, name = "COMPANY")
 )
 sealed class HibernatePerson {
-    abstract val type: ServiceProvider
+    abstract val type: Agency
 }

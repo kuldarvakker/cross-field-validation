@@ -2,7 +2,7 @@ package ee.taltech.crossfieldvalidation.yavi
 
 import ee.taltech.crossfieldvalidation.ValidationError
 import ee.taltech.crossfieldvalidation.ValidationErrors
-import ee.taltech.crossfieldvalidation.common.model.ServiceProvider
+import ee.taltech.crossfieldvalidation.common.model.Agency
 import ee.taltech.crossfieldvalidation.yavi.model.yaviPrivatePersonValidator
 import ee.taltech.crossfieldvalidation.yavi.model.yaviCompanyValidator
 import ee.taltech.crossfieldvalidation.yavi.model.YaviPerson
@@ -31,8 +31,8 @@ class YaviController {
 
     private fun validate(person: YaviPerson): ValidationErrors {
         val results = when(person.type) {
-            ServiceProvider.PRIVATE -> yaviPrivatePersonValidator.validate(person as YaviPrivatePerson)
-            ServiceProvider.COMPANY -> yaviCompanyValidator.validate(person as YaviCompany)
+            Agency.PRIVATE -> yaviPrivatePersonValidator.validate(person as YaviPrivatePerson)
+            Agency.COMPANY -> yaviCompanyValidator.validate(person as YaviCompany)
         }
         return if (!results.isValid) {
             val errors = results.details().map {

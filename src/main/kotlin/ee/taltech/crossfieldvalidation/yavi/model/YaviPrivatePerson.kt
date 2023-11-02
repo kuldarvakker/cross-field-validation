@@ -4,7 +4,7 @@ import am.ik.yavi.builder.ValidatorBuilder
 import am.ik.yavi.builder.validator
 import am.ik.yavi.core.ViolationMessage
 import ee.taltech.crossfieldvalidation.checkNumericValueBounds
-import ee.taltech.crossfieldvalidation.common.model.ServiceProvider
+import ee.taltech.crossfieldvalidation.common.model.Agency
 import ee.taltech.crossfieldvalidation.yavi.model.attributes.YaviAddress
 import ee.taltech.crossfieldvalidation.yavi.model.attributes.YaviHeight
 import ee.taltech.crossfieldvalidation.yavi.model.attributes.YaviWeight
@@ -12,7 +12,7 @@ import io.swagger.v3.oas.annotations.media.Schema
 
 data class YaviPrivatePerson(
     @field:Schema(allowableValues = ["PRIVATE"])
-    override val type: ServiceProvider = ServiceProvider.PRIVATE,
+    override val type: Agency = Agency.PRIVATE,
     @field:Schema(example = "Mari", minLength = 2, maxLength = 4)
     val firstName: String,
     @field:Schema(example = "Maasikas", minLength = 5, maxLength = 10)

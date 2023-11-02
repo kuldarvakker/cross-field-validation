@@ -1,6 +1,6 @@
 package ee.taltech.crossfieldvalidation.java_fluent.model
 
-import ee.taltech.crossfieldvalidation.common.model.ServiceProvider
+import ee.taltech.crossfieldvalidation.common.model.Agency
 import ee.taltech.crossfieldvalidation.java_fluent.model.attributes.JavaFluentAddress
 import ee.taltech.crossfieldvalidation.java_fluent.model.attributes.JavaFluentHeight
 import ee.taltech.crossfieldvalidation.java_fluent.model.attributes.JavaFluentWeight
@@ -8,7 +8,7 @@ import io.swagger.v3.oas.annotations.media.Schema
 
 data class JavaFluentPrivatePerson(
     @field:Schema(allowableValues = ["PRIVATE"])
-    override val type: ServiceProvider = ServiceProvider.PRIVATE,
+    override val type: Agency = Agency.PRIVATE,
     @field:Schema(example = "Mari", minLength = 2, maxLength = 4)
     val firstName: String,
     @field:Schema(example = "Maasikas", minLength = 5, maxLength = 10)

@@ -2,7 +2,7 @@ package ee.taltech.crossfieldvalidation.java_fluent.model
 
 import com.fasterxml.jackson.annotation.JsonSubTypes
 import com.fasterxml.jackson.annotation.JsonTypeInfo
-import ee.taltech.crossfieldvalidation.common.model.ServiceProvider
+import ee.taltech.crossfieldvalidation.common.model.Agency
 import jakarta.validation.executable.ValidateOnExecution
 
 @ValidateOnExecution
@@ -12,5 +12,5 @@ import jakarta.validation.executable.ValidateOnExecution
     JsonSubTypes.Type(value = JavaFluentCompany::class, name = "COMPANY")
 )
 sealed class JavaFluentPerson {
-    abstract val type: ServiceProvider
+    abstract val type: Agency
 }
