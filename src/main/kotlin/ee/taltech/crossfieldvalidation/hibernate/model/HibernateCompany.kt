@@ -6,8 +6,8 @@ import jakarta.validation.constraints.Size
 
 data class HibernateCompany(
     @field:Schema(allowableValues = ["COMPANY"])
-    override val type: Agency = Agency.COMPANY,
+    override val agency: Agency = Agency.COMPANY,
     @field:Size(min = 2, max = 4)
     @field:Schema(description = "Company's name", example = "Maja Üks OÜ")
     val name: String
-) : HibernatePerson()
+) : HibernateAgencyForm()

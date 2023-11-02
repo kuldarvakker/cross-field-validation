@@ -2,7 +2,7 @@ package ee.taltech.crossfieldvalidation.hibernate
 
 import ee.taltech.crossfieldvalidation.ValidationError
 import ee.taltech.crossfieldvalidation.ValidationErrors
-import ee.taltech.crossfieldvalidation.hibernate.model.HibernatePerson
+import ee.taltech.crossfieldvalidation.hibernate.model.HibernateAgencyForm
 import jakarta.validation.Validation
 import jakarta.validation.Validator
 import org.springframework.http.HttpStatus
@@ -17,7 +17,7 @@ class HibernateController {
     private val validator = getValidator()
 
     @PostMapping("/api/hibernate")
-    fun validatePerson(@RequestBody person: HibernatePerson): ResponseEntity<*> {
+    fun validatePerson(@RequestBody person: HibernateAgencyForm): ResponseEntity<*> {
         val validationErrors = validate(person)
 
         return if (validationErrors.errors.isEmpty()) {
@@ -32,7 +32,7 @@ class HibernateController {
         return factory.validator
     }
 
-    private fun validate(person: HibernatePerson): ValidationErrors {
+    private fun validate(person: HibernateAgencyForm): ValidationErrors {
         val results = validator.validate(person)
         return if (results.isNotEmpty()) {
             val errors = results.map {

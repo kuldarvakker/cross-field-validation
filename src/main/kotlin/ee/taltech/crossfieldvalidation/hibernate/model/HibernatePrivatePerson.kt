@@ -14,7 +14,7 @@ import jakarta.validation.constraints.Size
 data class HibernatePrivatePerson(
     @field:Schema(allowableValues = ["PRIVATE"])
     @field:NotNull
-    override val type: Agency = Agency.PRIVATE,
+    override val agency: Agency = Agency.PRIVATE,
     @field:Schema(example = "Mari")
     @field:Size(min = 2, max = 4)
     val firstName: String,
@@ -35,7 +35,7 @@ data class HibernatePrivatePerson(
     @field:Schema(description = "Person's weight")
     @field:Valid
     val weight: HibernateWeight
-) : HibernatePerson() {
+) : HibernateAgencyForm() {
 
     @JsonIgnore
     @AssertTrue(message = "Phone or Email must be present")
