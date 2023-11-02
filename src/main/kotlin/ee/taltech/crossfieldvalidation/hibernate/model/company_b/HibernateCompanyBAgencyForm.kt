@@ -13,4 +13,6 @@ data class HibernateCompanyBAgencyForm(
     @field:Schema(example = "MALE", allowableValues = ["MALE"])
     override val gender: Gender,
     override val phoneNumber: String,
+    override val socialMedia: List<HibernateCompanyBSocialMedia>,
+    override val height: HibernateCompanyBHeight
 ) : HibernateAgencyForm()

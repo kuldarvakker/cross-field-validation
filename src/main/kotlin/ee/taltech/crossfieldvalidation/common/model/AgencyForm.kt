@@ -30,7 +30,5 @@ abstract class AgencyForm {
     @field:JsonIgnore
     open val weight: Weight? = null
     @field:JsonIgnore
-    open val shoeSize: Int? = null
-    @field:JsonIgnore
     open val photos: List<Photo>? = null
 }

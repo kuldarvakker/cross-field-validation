@@ -25,6 +25,5 @@ data class HibernateGeneralAgencyForm(
     override val currentLocation: String,
     override val height: HibernateGeneralHeight,
     override val weight: HibernateGeneralWeight,
-    override val shoeSize: Int,
     override val photos: List<Photo>
 ) : HibernateAgencyForm()
