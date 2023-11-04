@@ -31,8 +31,9 @@ class YaviController {
 
     private fun validate(person: YaviPerson): ValidationErrors {
         val results = when(person.type) {
-            Agency.PRIVATE -> yaviPrivatePersonValidator.validate(person as YaviPrivatePerson)
-            Agency.COMPANY -> yaviCompanyValidator.validate(person as YaviCompany)
+            Agency.GENERAL -> yaviPrivatePersonValidator.validate(person as YaviPrivatePerson)
+            Agency.COMPANY_A -> yaviCompanyValidator.validate(person as YaviCompany)
+            Agency.COMPANY_B -> yaviCompanyValidator.validate(person as YaviCompany)
         }
         return if (!results.isValid) {
             val errors = results.details().map {

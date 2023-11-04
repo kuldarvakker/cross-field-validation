@@ -29,8 +29,9 @@ class KonformController {
 
     private fun validate(person: KonformPerson): ValidationErrors {
         val results = when (person.type) {
-            Agency.PRIVATE -> KonformPrivatePerson.validate(person as KonformPrivatePerson)
-            Agency.COMPANY -> KonformCompany.validate(person as KonformCompany)
+            Agency.GENERAL -> KonformPrivatePerson.validate(person as KonformPrivatePerson)
+            Agency.COMPANY_A -> KonformCompany.validate(person as KonformCompany)
+            Agency.COMPANY_B -> KonformCompany.validate(person as KonformCompany)
         }
         return if (results.errors.isNotEmpty()) {
             val errors = results.errors.map {

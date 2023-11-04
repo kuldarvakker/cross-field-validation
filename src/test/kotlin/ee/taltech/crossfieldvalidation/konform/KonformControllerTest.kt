@@ -19,11 +19,11 @@ class KonformControllerTest(@Autowired private val mockMvc: MockMvc) {
     fun `validatePerson - success`() {
         mockMvc.post(url) {
             contentType = MediaType.APPLICATION_JSON
-            content = PersonJson.validPerson
+            content = PersonJson.validCompanyAForm
             accept = MediaType.APPLICATION_JSON
         }.andExpect {
             status { isOk() }
-            content { json(PersonJson.validPerson, strict = true) }
+            content { json(PersonJson.validCompanyAForm, strict = true) }
         }
     }
 

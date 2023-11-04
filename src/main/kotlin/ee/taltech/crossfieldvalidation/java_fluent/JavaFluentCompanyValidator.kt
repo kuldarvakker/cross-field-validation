@@ -16,9 +16,9 @@ class JavaFluentCompanyValidator : AbstractValidator<JavaFluentCompany> {
         setPropertyOnContext("person")
 
         ruleFor(JavaFluentCompany::type)
-            .must(equalTo(Agency.COMPANY))
+            .must(equalTo(Agency.GENERAL))
             .`when`(not(nullValue()))
-            .withMessage("person type must be ${Agency.COMPANY.name}")
+            .withMessage("person type must be ${Agency.GENERAL.name}")
             .withFieldName(JavaFluentCompany::type.name)
             .critical()
 

@@ -8,7 +8,7 @@ import io.swagger.v3.oas.annotations.media.Schema
 
 data class JavaFluentPrivatePerson(
     @field:Schema(allowableValues = ["PRIVATE"])
-    override val type: Agency = Agency.PRIVATE,
+    override val type: Agency = Agency.GENERAL,
     @field:Schema(example = "Mari", minLength = 2, maxLength = 4)
     val firstName: String,
     @field:Schema(example = "Maasikas", minLength = 5, maxLength = 10)

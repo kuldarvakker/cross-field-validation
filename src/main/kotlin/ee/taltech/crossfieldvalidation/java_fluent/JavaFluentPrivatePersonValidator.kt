@@ -17,7 +17,7 @@ class JavaFluentPrivatePersonValidator : AbstractValidator<JavaFluentPrivatePers
         setPropertyOnContext("person")
 
         ruleFor(JavaFluentPrivatePerson::type)
-            .must(equalTo(Agency.PRIVATE))
+            .must(equalTo(Agency.GENERAL))
             .`when`(not(nullValue()))
             .withMessage("person type must be PRIVATE")
             .withFieldName(JavaFluentPrivatePerson::type.name)

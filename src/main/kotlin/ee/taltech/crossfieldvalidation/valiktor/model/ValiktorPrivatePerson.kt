@@ -15,7 +15,7 @@ import org.valiktor.functions.validate
 
 data class ValiktorPrivatePerson(
     @field:Schema(allowableValues = ["PRIVATE"])
-    override val type: Agency = Agency.PRIVATE,
+    override val type: Agency = Agency.GENERAL,
     @field:Schema(example = "Mari", minLength = 2, maxLength = 4)
     val firstName: String,
     @field:Schema(example = "Maasikas", minLength = 5, maxLength = 10)
@@ -33,7 +33,7 @@ data class ValiktorPrivatePerson(
 ) : ValiktorPerson() {
     init {
         validate(this) { person ->
-            validate(ValiktorPrivatePerson::type).isValid { it == Agency.PRIVATE }
+            validate(ValiktorPrivatePerson::type).isValid { it == Agency.GENERAL }
             validate(ValiktorPrivatePerson::firstName).hasSize(min = 2, max = 4)
             validate(ValiktorPrivatePerson::lastName).hasSize(min = 5, max = 10)
             validate(ValiktorPrivatePerson::phoneNumber).withMessage("Phone or Email must be present") {

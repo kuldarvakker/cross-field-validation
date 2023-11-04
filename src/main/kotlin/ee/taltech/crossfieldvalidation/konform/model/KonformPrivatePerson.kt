@@ -15,7 +15,7 @@ import io.swagger.v3.oas.annotations.media.Schema
 
 data class KonformPrivatePerson(
     @field:Schema(allowableValues = ["PRIVATE"])
-    override val type: Agency = Agency.PRIVATE,
+    override val type: Agency = Agency.GENERAL,
     @field:Schema(example = "Mari", minLength = 2, maxLength = 4)
     val firstName: String,
     @field:Schema(example = "Maasikas", minLength = 5, maxLength = 10)
@@ -34,7 +34,7 @@ data class KonformPrivatePerson(
 
     companion object {
         val validate = Validation<KonformPrivatePerson> {
-            KonformPrivatePerson::type required { enum(Agency.PRIVATE) }
+            KonformPrivatePerson::type required { enum(Agency.GENERAL) }
             KonformPrivatePerson::firstName required {
                 minLength(2)
                 maxLength(4)

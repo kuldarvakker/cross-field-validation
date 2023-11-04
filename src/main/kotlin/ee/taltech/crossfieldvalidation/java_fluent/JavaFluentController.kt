@@ -32,8 +32,9 @@ class JavaFluentController {
 
     private fun validate(person: JavaFluentPerson): ValidationErrors {
         val results = when (person.type) {
-            Agency.PRIVATE -> privatePersonValidator.validate(person as JavaFluentPrivatePerson)
-            Agency.COMPANY -> companyValidator.validate(person as JavaFluentCompany)
+            Agency.GENERAL -> privatePersonValidator.validate(person as JavaFluentPrivatePerson)
+            Agency.COMPANY_A -> companyValidator.validate(person as JavaFluentCompany)
+            Agency.COMPANY_B -> companyValidator.validate(person as JavaFluentCompany)
         }
         return if (!results.isValid) {
             val errors = results.errors.map {

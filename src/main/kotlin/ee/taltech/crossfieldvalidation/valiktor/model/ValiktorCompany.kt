@@ -8,7 +8,7 @@ import org.valiktor.validate
 
 data class ValiktorCompany(
     @field:Schema(allowableValues = ["COMPANY"])
-    override val type: Agency = Agency.COMPANY,
+    override val type: Agency = Agency.GENERAL,
     @field:Schema(description = "Company's name", example = "Maja Üks OÜ", minLength = 2, maxLength = 4)
     val name: String,
 ) : ValiktorPerson() {
