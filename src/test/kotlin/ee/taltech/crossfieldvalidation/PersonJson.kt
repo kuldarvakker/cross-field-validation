@@ -72,35 +72,69 @@ object PersonJson {
         }
     """.trimIndent()
 
-    val invalidGeneralForm = """
+    val validGeneralForm = """
         {
-            "type": "PRIVATE",
-            "firstName": "Toomas",
-            "lastName": "Maasi",
-            
-            
-            "address": {
-                "street": "S",
-                "city": "",
-                "state": "State",
-                "country": "EE",
-                "postalCode": "Ab"
-            },
+            "agency": "GENERAL",
+            "firstName": "John",
+            "lastName": "Doe",
+            "gender": "MALE",
+            "birthDate": "1995-12-25",
+            "phoneNumber": "37212345679",
+            "email": "john@doe.ee",
+            "socialMedia": [
+                {
+                  "platform":"FACEBOOK",
+                  "profileUrl":"https://facebook.com/profile/johndoe"
+                }
+            ],
+            "currentLocation": "Tallinn, Estonia",
             "height": {
-                "value": 180.024,
-                "unit": "cm"
+                "value": 187.12,
+                "unit": "CM"
             },
             "weight": {
-                "value": 3180,
-                "unit": "kg"
-            }
+                "value": 78,
+                "unit": "KG"
+            },
+            "photos": [
+                {
+                    "typeOfPhoto": "head",
+                    "photoUrl": "https://facebook.com/profile/johndoe/pictures/123.png"
+                }
+            ]
         }
     """.trimIndent()
 
-    val validGeneralForm = """
+    val invalidGeneralForm = """
         {
-            "type": "COMPANY",
-            "name": "Name"
+            "agency": "GENERAL",
+            "firstName": "John",
+            "lastName": "Doe",
+            "gender": "MEES",
+            "birthDate": "1995-12-25",
+            "phoneNumber": "37212345679",
+            "email": "john@doe.ee",
+            "socialMedia": [
+                {
+                  "platform":"FACEBOOK",
+                  "profileUrl":"https://facebook.com/profile/johndoe"
+                }
+            ],
+            "currentLocation": "Tallinn, Estonia",
+            "height": {
+                "value": 187.12,
+                "unit": "CM"
+            },
+            "weight": {
+                "value": 78,
+                "unit": "KG"
+            },
+            "photos": [
+                {
+                    "typeOfPhoto": "head",
+                    "photoUrl": "https://facebook.com/profile/johndoe/pictures/123.png"
+                }
+            ]
         }
     """.trimIndent()
 }

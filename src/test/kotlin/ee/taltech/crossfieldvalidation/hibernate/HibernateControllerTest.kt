@@ -153,26 +153,10 @@ class HibernateControllerTest(@Autowired private val mockMvc: MockMvc) {
                 status { isBadRequest() }
                 content { json("""
                     {
-                      "errors": [
+                      "errors":[
                         {
-                          "field": "socialMedia[2].profileUrl",
-                          "message": "size must be between 1 and 128"
-                        },
-                        {
-                          "field": "socialMedia",
-                          "message": "size must be between 1 and 2"
-                        },
-                        {
-                          "field": "socialMedia[2].platform",
-                          "message": "Value TIKTOK not allowed. Allowed values are [FACEBOOK, TWITTER_X]"
-                        },
-                        {
-                          "field": "height.unit",
-                          "message": "Value M not allowed. Allowed values are [CM]"
-                        },
-                        {
-                          "field": "height.value",
-                          "message": "numeric value out of bounds (<3 digits>.<0 digits> expected)"
+                          "field":"constraint",
+                          "message":"Invalid request field: gender"
                         }
                       ]
                     }
