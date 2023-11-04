@@ -40,7 +40,7 @@ object PersonJson {
           ],
           "height": {
             "value": 180,
-            "unit": "cm"
+            "unit": "CM"
           }
         }
     """.trimIndent()
@@ -72,7 +72,7 @@ object PersonJson {
         }
     """.trimIndent()
 
-    val invalidPerson = """
+    val invalidGeneralForm = """
         {
             "type": "PRIVATE",
             "firstName": "Toomas",
@@ -97,17 +97,10 @@ object PersonJson {
         }
     """.trimIndent()
 
-    val validCompany = """
+    val validGeneralForm = """
         {
             "type": "COMPANY",
             "name": "Name"
-        }
-    """.trimIndent()
-
-    val invalidCompany = """
-        {
-            "type": "COMPANY",
-            "name": "Too Lengthy Name"
         }
     """.trimIndent()
 }

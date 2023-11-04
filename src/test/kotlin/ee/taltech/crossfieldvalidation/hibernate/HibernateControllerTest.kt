@@ -94,90 +94,89 @@ class HibernateControllerTest(@Autowired private val mockMvc: MockMvc) {
                 MockMvcResultHandlers.print()
             }.andExpect {
                 status { isBadRequest() }
-                content { json(PersonJson.validCompanyBForm, strict = true) }
-            }
-        }
-    }
-
-    @Test
-    fun `validatePerson - failure`() {
-        mockMvc.post(url) {
-            contentType = MediaType.APPLICATION_JSON
-            content = PersonJson.invalidPerson
-            accept = MediaType.APPLICATION_JSON
-        }.andExpect {
-            status { isBadRequest() }
-            content {
-                json(
-                    """
+                content { json("""
                     {
                       "errors": [
                         {
-                          "field": "address.city",
-                          "message": "size must be between 2 and 2147483647"
+                          "field": "socialMedia[2].profileUrl",
+                          "message": "size must be between 1 and 128"
                         },
                         {
-                          "field": "firstName",
-                          "message": "size must be between 2 and 4"
+                          "field": "socialMedia",
+                          "message": "size must be between 1 and 2"
                         },
                         {
-                          "field": "atLeastPhoneOrEmailPresent",
-                          "message": "Phone or Email must be present"
+                          "field": "socialMedia[2].platform",
+                          "message": "Value TIKTOK not allowed. Allowed values are [FACEBOOK, TWITTER_X]"
+                        },
+                        {
+                          "field": "height.unit",
+                          "message": "Value M not allowed. Allowed values are [CM]"
                         },
                         {
                           "field": "height.value",
-                          "message": "numeric value out of bounds (<3 digits>.<2 digits> expected)"
-                        },
-                        {
-                          "field": "weight.value",
-                          "message": "numeric value out of bounds (<3 digits>.<2 digits> expected)"
-                        },
-                        {
-                          "field": "address.street",
-                          "message": "size must be between 2 and 2147483647"
+                          "message": "numeric value out of bounds (<3 digits>.<0 digits> expected)"
                         }
                       ]
                     }
-                """.trimIndent()
-                )
+                """.trimIndent()) }
             }
         }
     }
 
-    @Test
-    fun `validateCompany - success`() {
-        mockMvc.post(url) {
-            contentType = MediaType.APPLICATION_JSON
-            content = PersonJson.validCompany
-            accept = MediaType.APPLICATION_JSON
-        }.andExpect {
-            status { isOk() }
-            content { json(PersonJson.validCompany, strict = true) }
-        }
-    }
+    @Nested
+    inner class General {
 
-    @Test
-    fun `validateCompany - failure`() {
-        mockMvc.post(url) {
-            contentType = MediaType.APPLICATION_JSON
-            content = PersonJson.invalidCompany
-            accept = MediaType.APPLICATION_JSON
-        }.andExpect {
-            status { isBadRequest() }
-            content {
-                json(
-                    """
+        @Test
+        fun `validateGeneralForm - success`() {
+            mockMvc.post(url) {
+                contentType = MediaType.APPLICATION_JSON
+                content = PersonJson.validGeneralForm
+                accept = MediaType.APPLICATION_JSON
+            }.andDo {
+                MockMvcResultHandlers.print()
+            }.andExpect {
+                status { isOk() }
+                content { json(PersonJson.validGeneralForm, strict = true) }
+            }
+        }
+
+        @Test
+        fun `validateGeneralForm - failure`() {
+            mockMvc.post(url) {
+                contentType = MediaType.APPLICATION_JSON
+                content = PersonJson.invalidGeneralForm
+                accept = MediaType.APPLICATION_JSON
+            }.andDo {
+                MockMvcResultHandlers.print()
+            }.andExpect {
+                status { isBadRequest() }
+                content { json("""
                     {
                       "errors": [
                         {
-                          "field": "name",
-                          "message": "size must be between 2 and 4"
+                          "field": "socialMedia[2].profileUrl",
+                          "message": "size must be between 1 and 128"
+                        },
+                        {
+                          "field": "socialMedia",
+                          "message": "size must be between 1 and 2"
+                        },
+                        {
+                          "field": "socialMedia[2].platform",
+                          "message": "Value TIKTOK not allowed. Allowed values are [FACEBOOK, TWITTER_X]"
+                        },
+                        {
+                          "field": "height.unit",
+                          "message": "Value M not allowed. Allowed values are [CM]"
+                        },
+                        {
+                          "field": "height.value",
+                          "message": "numeric value out of bounds (<3 digits>.<0 digits> expected)"
                         }
                       ]
                     }
-                """.trimIndent(),
-                    strict = true
-                )
+                """.trimIndent()) }
             }
         }
     }
