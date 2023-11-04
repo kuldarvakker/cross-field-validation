@@ -11,7 +11,9 @@ import jakarta.validation.constraints.Size
 data class HibernateCompanyBAgencyForm(
     @field:Schema(allowableValues = ["COMPANY_B"])
     override val agency: Agency = Agency.COMPANY_B,
+    @field:Size(min = 1, max = 50)
     override val firstName: String,
+    @field:Size(min = 1, max = 50)
     override val lastName: String,
     @field:Schema(example = "MALE", allowableValues = ["MALE"])
     @field:CheckEnumValues(allowedValues = ["MALE"])

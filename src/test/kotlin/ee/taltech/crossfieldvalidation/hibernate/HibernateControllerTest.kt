@@ -1,6 +1,7 @@
 package ee.taltech.crossfieldvalidation.hibernate
 
 import ee.taltech.crossfieldvalidation.PersonJson
+import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
@@ -17,31 +18,34 @@ class HibernateControllerTest(@Autowired private val mockMvc: MockMvc) {
 
     private val url = "/api/hibernate"
 
-    @Test
-    fun `validateCompanyAForm - success`() {
-        mockMvc.post(url) {
-            contentType = MediaType.APPLICATION_JSON
-            content = PersonJson.validCompanyAForm
-            accept = MediaType.APPLICATION_JSON
-        }.andDo {
-            MockMvcResultHandlers.print()
-        }.andExpect {
-            status { isOk() }
-            content { json(PersonJson.validCompanyAForm, strict = true) }
-        }
-    }
+    @Nested
+    inner class CompanyA {
 
-    @Test
-    fun `validateCompanyAForm - failure`() {
-        mockMvc.post(url) {
-            contentType = MediaType.APPLICATION_JSON
-            content = PersonJson.invalidCompanyAForm
-            accept = MediaType.APPLICATION_JSON
-        }.andDo {
-            MockMvcResultHandlers.print()
-        }.andExpect {
-            status { isBadRequest() }
-            content { json("""
+        @Test
+        fun `validateCompanyAForm - success`() {
+            mockMvc.post(url) {
+                contentType = MediaType.APPLICATION_JSON
+                content = PersonJson.validCompanyAForm
+                accept = MediaType.APPLICATION_JSON
+            }.andDo {
+                MockMvcResultHandlers.print()
+            }.andExpect {
+                status { isOk() }
+                content { json(PersonJson.validCompanyAForm, strict = true) }
+            }
+        }
+
+        @Test
+        fun `validateCompanyAForm - failure`() {
+            mockMvc.post(url) {
+                contentType = MediaType.APPLICATION_JSON
+                content = PersonJson.invalidCompanyAForm
+                accept = MediaType.APPLICATION_JSON
+            }.andDo {
+                MockMvcResultHandlers.print()
+            }.andExpect {
+                status { isBadRequest() }
+                content { json("""
                 {
                   "errors": [
                     {
@@ -59,6 +63,39 @@ class HibernateControllerTest(@Autowired private val mockMvc: MockMvc) {
                   ]
                 }
             """.trimIndent()) }
+            }
+        }
+    }
+
+    @Nested
+    inner class CompanyB {
+
+        @Test
+        fun `validateCompanyBForm - success`() {
+            mockMvc.post(url) {
+                contentType = MediaType.APPLICATION_JSON
+                content = PersonJson.validCompanyBForm
+                accept = MediaType.APPLICATION_JSON
+            }.andDo {
+                MockMvcResultHandlers.print()
+            }.andExpect {
+                status { isOk() }
+                content { json(PersonJson.validCompanyBForm, strict = true) }
+            }
+        }
+
+        @Test
+        fun `validateCompanyBForm - failure`() {
+            mockMvc.post(url) {
+                contentType = MediaType.APPLICATION_JSON
+                content = PersonJson.invalidCompanyBForm
+                accept = MediaType.APPLICATION_JSON
+            }.andDo {
+                MockMvcResultHandlers.print()
+            }.andExpect {
+                status { isBadRequest() }
+                content { json(PersonJson.validCompanyBForm, strict = true) }
+            }
         }
     }
 

@@ -22,6 +22,56 @@ object PersonJson {
         }
     """.trimIndent()
 
+    val validCompanyBForm = """
+        {
+          "agency": "COMPANY_B",
+          "firstName": "Mari",
+          "lastName": "Maasikas",
+          "gender": "MALE",
+          "socialMedia": [
+            {
+              "platform":"FACEBOOK",
+              "profileUrl":"https://facebook.com/profile/123"
+            },
+            {
+              "platform":"TWITTER_X",
+              "profileUrl":"https://twitter.com/profile/123"
+            }
+          ],
+          "height": {
+            "value": 180,
+            "unit": "cm"
+          }
+        }
+    """.trimIndent()
+
+    val invalidCompanyBForm = """
+        {
+          "agency": "COMPANY_B",
+          "firstName": "Mari",
+          "lastName": "Maasikas",
+          "gender": "MALE",
+          "socialMedia": [
+            {
+              "platform":"FACEBOOK",
+              "profileUrl":"https://facebook.com/profile/123"
+            },
+            {
+              "platform":"TWITTER_X",
+              "profileUrl":"https://twitter.com/profile/123"
+            },
+            {
+              "platform":"TIKTOK",
+              "profileUrl":"https://tiktok.com/profile/123-with-extra-long-lengthy-url-with-extra-long-lengthy-url-with-extra-long-lengthy-url-with-extra-long-lengthy-url-123"
+            }
+          ],
+          "height": {
+            "value": 1.8,
+            "unit": "M"
+          }
+        }
+    """.trimIndent()
+
     val invalidPerson = """
         {
             "type": "PRIVATE",
