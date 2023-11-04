@@ -4,7 +4,6 @@ import jakarta.validation.Constraint
 import jakarta.validation.ConstraintValidator
 import jakarta.validation.ConstraintValidatorContext
 import jakarta.validation.Payload
-import org.hibernate.validator.constraintvalidation.HibernateConstraintValidatorContext
 import java.time.LocalDate
 import kotlin.reflect.KClass
 
