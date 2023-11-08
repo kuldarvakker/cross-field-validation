@@ -27,14 +27,8 @@ data class HibernateGeneralAgencyForm(
     @field:Size(min = 1, max = 10)
     @field:Valid
     override val socialMedia: List<HibernateGeneralSocialMedia>,
-    @field:Schema(description = "Candidate's current city, country")
-    @field:Size(min = 1, max = 128)
-    override val currentLocation: String,
     @field:Valid
     override val height: HibernateGeneralHeight,
     @field:Valid
     override val weight: HibernateGeneralWeight,
-    @field:Size(min = 1, max = 10)
-    @field:Valid
-    override val photos: List<HibernateGeneralPhoto>
 ) : HibernateAgencyForm()

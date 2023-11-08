@@ -87,7 +87,6 @@ object PersonJson {
                   "profileUrl":"https://facebook.com/profile/johndoe"
                 }
             ],
-            "currentLocation": "Tallinn, Estonia",
             "height": {
                 "value": 187.12,
                 "unit": "CM"
@@ -95,13 +94,7 @@ object PersonJson {
             "weight": {
                 "value": 78,
                 "unit": "KG"
-            },
-            "photos": [
-                {
-                    "typeOfPhoto": "head",
-                    "photoUrl": "https://facebook.com/profile/johndoe/pictures/123.png"
-                }
-            ]
+            }
         }
     """.trimIndent()
 
@@ -120,7 +113,6 @@ object PersonJson {
                   "profileUrl":"https://facebook.com/profile/johndoe"
                 }
             ],
-            "currentLocation": "Tallinn, Estonia",
             "height": {
                 "value": 187.12,
                 "unit": "CM"
@@ -128,13 +120,7 @@ object PersonJson {
             "weight": {
                 "value": 78,
                 "unit": "KG"
-            },
-            "photos": [
-                {
-                    "typeOfPhoto": "head",
-                    "photoUrl": "https://facebook.com/profile/johndoe/pictures/123.png"
-                }
-            ]
+            }
         }
     """.trimIndent()
 }
