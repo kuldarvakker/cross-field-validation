@@ -4,8 +4,8 @@ import br.com.fluentvalidator.Validator
 import ee.taltech.crossfieldvalidation.ValidationError
 import ee.taltech.crossfieldvalidation.ValidationErrors
 import ee.taltech.crossfieldvalidation.common.model.Agency
+import ee.taltech.crossfieldvalidation.java_fluent.model.JavaFluentAgencyForm
 import ee.taltech.crossfieldvalidation.java_fluent.model.JavaFluentCompany
-import ee.taltech.crossfieldvalidation.java_fluent.model.JavaFluentPerson
 import ee.taltech.crossfieldvalidation.java_fluent.model.JavaFluentPrivatePerson
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -20,7 +20,7 @@ class JavaFluentController {
     private final val companyValidator: Validator<JavaFluentCompany> = JavaFluentCompanyValidator()
 
     @PostMapping("/api/java_fluent")
-    fun validatePerson(@RequestBody person: JavaFluentPerson): ResponseEntity<*> {
+    fun validatePerson(@RequestBody person: JavaFluentAgencyForm): ResponseEntity<*> {
         val validationErrors = validate(person)
 
         return if (validationErrors.errors.isEmpty()) {
@@ -30,11 +30,11 @@ class JavaFluentController {
         }
     }
 
-    private fun validate(person: JavaFluentPerson): ValidationErrors {
-        val results = when (person.type) {
-            Agency.GENERAL -> privatePersonValidator.validate(person as JavaFluentPrivatePerson)
-            Agency.COMPANY_A -> companyValidator.validate(person as JavaFluentCompany)
-            Agency.COMPANY_B -> companyValidator.validate(person as JavaFluentCompany)
+    private fun validate(form: JavaFluentAgencyForm): ValidationErrors {
+        val results = when (form.agency) {
+            Agency.GENERAL -> privatePersonValidator.validate(form as JavaFluentPrivatePerson)
+            Agency.COMPANY_A -> companyValidator.validate(form as JavaFluentCompany)
+            Agency.COMPANY_B -> companyValidator.validate(form as JavaFluentCompany)
         }
         return if (!results.isValid) {
             val errors = results.errors.map {
