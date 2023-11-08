@@ -9,9 +9,8 @@ import java.math.BigDecimal
 
 @Validated
 data class HibernateGeneralHeight(
-    @field:Schema(example = "100.20")
     @field:Digits(integer = 3, fraction = 2)
     override val value: BigDecimal,
-    @field:Schema(example = "cm")
+    @field:Schema(allowableValues = ["M", "CM"])
     override val unit: HeightUnits
 ): Height()
