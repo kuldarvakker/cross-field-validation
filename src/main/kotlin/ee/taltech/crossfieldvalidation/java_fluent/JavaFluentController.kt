@@ -8,9 +8,9 @@ import ee.taltech.crossfieldvalidation.java_fluent.model.JavaFluentAgencyForm
 import ee.taltech.crossfieldvalidation.java_fluent.model.company_a.JavaFluentCompanyAAgencyForm
 import ee.taltech.crossfieldvalidation.java_fluent.model.company_b.JavaFluentCompanyBAgencyForm
 import ee.taltech.crossfieldvalidation.java_fluent.model.general.JavaFluentGeneralAgencyForm
-import ee.taltech.crossfieldvalidation.java_fluent.validator.JavaFluentCompanyAValidator
-import ee.taltech.crossfieldvalidation.java_fluent.validator.JavaFluentCompanyBValidator
-import ee.taltech.crossfieldvalidation.java_fluent.validator.JavaFluentGeneralValidator
+import ee.taltech.crossfieldvalidation.java_fluent.validator.company_a.JavaFluentCompanyAValidator
+import ee.taltech.crossfieldvalidation.java_fluent.validator.company_b.JavaFluentCompanyBValidator
+import ee.taltech.crossfieldvalidation.java_fluent.validator.general.JavaFluentGeneralValidator
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.RestController

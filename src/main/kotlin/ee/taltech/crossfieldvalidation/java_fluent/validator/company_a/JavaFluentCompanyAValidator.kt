@@ -1,8 +1,9 @@
-package ee.taltech.crossfieldvalidation.java_fluent.validator
+package ee.taltech.crossfieldvalidation.java_fluent.validator.company_a
 
 import br.com.fluentvalidator.predicate.LocalDatePredicate.localDateAfterOrEqual
 import br.com.fluentvalidator.predicate.StringPredicate.stringSizeBetween
 import ee.taltech.crossfieldvalidation.java_fluent.model.company_a.JavaFluentCompanyAAgencyForm
+import ee.taltech.crossfieldvalidation.java_fluent.validator.FluentValidator
 import java.time.LocalDate
 
 class JavaFluentCompanyAValidator : FluentValidator<JavaFluentCompanyAAgencyForm>() {
