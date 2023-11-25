@@ -98,23 +98,23 @@ class KonformControllerTest(@Autowired private val mockMvc: MockMvc) {
                     {
                       "errors": [
                         {
-                          "field": "socialMedia[2].profileUrl",
-                          "message": "size must be between 1 and 128"
+                          "field": ".socialMedia[2].profileUrl",
+                          "message": "must have at most 128 characters"
                         },
                         {
-                          "field": "socialMedia",
-                          "message": "size must be between 1 and 2"
+                          "field": ".socialMedia",
+                          "message": "must have at most 2 items"
                         },
                         {
-                          "field": "socialMedia[2].platform",
+                          "field": ".socialMedia[2].platform",
                           "message": "Value TIKTOK not allowed. Allowed values are [FACEBOOK, TWITTER_X]"
                         },
                         {
-                          "field": "height.unit",
+                          "field": ".height.unit",
                           "message": "Value M not allowed. Allowed values are [CM]"
                         },
                         {
-                          "field": "height.value",
+                          "field": ".height.value",
                           "message": "numeric value out of bounds (<3 digits>.<0 digits> expected)"
                         }
                       ]
