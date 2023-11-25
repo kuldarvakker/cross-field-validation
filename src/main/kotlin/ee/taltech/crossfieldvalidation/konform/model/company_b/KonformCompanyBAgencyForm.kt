@@ -32,7 +32,7 @@ data class KonformCompanyBAgencyForm(
 ) : KonformAgencyForm() {
     companion object {
         val validate = Validation<KonformCompanyBAgencyForm> {
-            KonformCompanyBAgencyForm::agency { enum(Agency.COMPANY_A) }
+            KonformCompanyBAgencyForm::agency { enum(Agency.COMPANY_B) }
             KonformCompanyBAgencyForm::firstName {
                 minLength(1)
                 maxLength(50)
@@ -62,19 +62,6 @@ data class KonformCompanyBAgencyForm(
                         checkNumericValueBounds(it, 3, 0)
                     }
                 }
-            }
-
-            KonformCompanyBAgencyForm::birthDate required {
-                val reqDate = LocalDate.ofYearDay(2000, 1)
-                addConstraint(
-                    "Date must be after or equals to ${reqDate.year}-${reqDate.monthValue}-${reqDate.dayOfMonth}"
-                ) {
-                    it.isEqual(reqDate).or(it.isAfter(reqDate))
-                }
-            }
-
-            addConstraint("Phone or Email must be present") { person ->
-                (!person.phoneNumber.isNullOrBlank() || !person.email.isNullOrBlank())
             }
         }
     }
