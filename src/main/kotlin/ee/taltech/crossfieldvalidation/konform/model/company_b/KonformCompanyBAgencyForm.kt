@@ -1,8 +1,19 @@
 package ee.taltech.crossfieldvalidation.konform.model.company_b
 
+import ee.taltech.crossfieldvalidation.checkNumericValueBounds
 import ee.taltech.crossfieldvalidation.common.model.Agency
 import ee.taltech.crossfieldvalidation.common.model.attributes.Gender
-import ee.taltech.crossfieldvalidation.java_fluent.model.JavaFluentAgencyForm
+import ee.taltech.crossfieldvalidation.common.model.attributes.HeightUnits
+import ee.taltech.crossfieldvalidation.common.model.attributes.SocialMediaPlatforms.FACEBOOK
+import ee.taltech.crossfieldvalidation.common.model.attributes.SocialMediaPlatforms.TWITTER_X
+import ee.taltech.crossfieldvalidation.konform.model.KonformAgencyForm
+import io.konform.validation.Validation
+import io.konform.validation.jsonschema.enum
+import io.konform.validation.jsonschema.maxItems
+import io.konform.validation.jsonschema.maxLength
+import io.konform.validation.jsonschema.minItems
+import io.konform.validation.jsonschema.minLength
+import io.konform.validation.onEach
 import io.swagger.v3.oas.annotations.media.ArraySchema
 import io.swagger.v3.oas.annotations.media.Schema
 
@@ -18,4 +29,53 @@ data class KonformCompanyBAgencyForm(
     @field:ArraySchema(minItems = 1, maxItems = 2)
     override val socialMedia: List<KonformCompanyBSocialMedia>,
     override val height: KonformCompanyBHeight,
-) : JavaFluentAgencyForm()
+) : KonformAgencyForm() {
+    companion object {
+        val validate = Validation<KonformCompanyBAgencyForm> {
+            KonformCompanyBAgencyForm::agency { enum(Agency.COMPANY_A) }
+            KonformCompanyBAgencyForm::firstName {
+                minLength(1)
+                maxLength(50)
+            }
+            KonformCompanyBAgencyForm::lastName {
+                minLength(1)
+                maxLength(50)
+            }
+            KonformCompanyBAgencyForm::gender { enum(Gender.MALE) }
+            KonformCompanyBAgencyForm::socialMedia {
+                minItems(1)
+                maxItems(2)
+                onEach {
+                    KonformCompanyBSocialMedia::platform {
+                        enum(FACEBOOK, TWITTER_X)
+                    }
+                    KonformCompanyBSocialMedia::profileUrl {
+                        minLength(1)
+                        maxLength(128)
+                    }
+                }
+            }
+            KonformCompanyBAgencyForm::height {
+                KonformCompanyBHeight::unit { enum(HeightUnits.CM) }
+                KonformCompanyBHeight::value {
+                    addConstraint("numeric value out of bounds (<3 digits>.<0 digits> expected)") {
+                        checkNumericValueBounds(it, 3, 0)
+                    }
+                }
+            }
+
+            KonformCompanyBAgencyForm::birthDate required {
+                val reqDate = LocalDate.ofYearDay(2000, 1)
+                addConstraint(
+                    "Date must be after or equals to ${reqDate.year}-${reqDate.monthValue}-${reqDate.dayOfMonth}"
+                ) {
+                    it.isEqual(reqDate).or(it.isAfter(reqDate))
+                }
+            }
+
+            addConstraint("Phone or Email must be present") { person ->
+                (!person.phoneNumber.isNullOrBlank() || !person.email.isNullOrBlank())
+            }
+        }
+    }
+}

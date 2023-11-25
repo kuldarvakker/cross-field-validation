@@ -28,23 +28,21 @@ class KonformController {
     }
 
     private fun validate(form: KonformAgencyForm): ValidationErrors {
-//        val results = when (form.agency) {
-//            Agency.GENERAL -> // TODO((form as KonformGeneralAgencyForm)
-//            Agency.COMPANY_A -> // TODO(form as KonformCompanyAAgencyForm)
-//            Agency.COMPANY_B -> // TODO(form as KonformCompanyBAgencyForm)
-//        }
-//        return if (results.errors.isNotEmpty()) {
-//            val errors = results.errors.map {
-//                ValidationError(
-//                    field = it.dataPath,
-//                    message = it.message
-//                )
-//            }
-//            ValidationErrors(errors)
-//        } else {
-//            ValidationErrors(emptyList())
-//        }
-
-        return ValidationErrors(emptyList())
+        val results = when (form.agency) {
+            Agency.GENERAL -> KonformGeneralAgencyForm.validate(form as KonformGeneralAgencyForm)
+            Agency.COMPANY_A -> KonformCompanyAAgencyForm.validate(form as KonformCompanyAAgencyForm)
+            Agency.COMPANY_B -> KonformCompanyBAgencyForm.validate(form as KonformCompanyBAgencyForm)
+        }
+        return if (results.errors.isNotEmpty()) {
+            val errors = results.errors.map {
+                ValidationError(
+                    field = it.dataPath,
+                    message = it.message
+                )
+            }
+            ValidationErrors(errors)
+        } else {
+            ValidationErrors(emptyList())
+        }
     }
 }
