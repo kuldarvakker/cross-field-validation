@@ -2,11 +2,10 @@ package ee.taltech.crossfieldvalidation.konform.model.general
 
 import ee.taltech.crossfieldvalidation.common.model.Agency
 import ee.taltech.crossfieldvalidation.common.model.attributes.Gender
+import ee.taltech.crossfieldvalidation.konform.length
 import ee.taltech.crossfieldvalidation.konform.model.KonformAgencyForm
 import io.konform.validation.Validation
 import io.konform.validation.jsonschema.enum
-import io.konform.validation.jsonschema.maxLength
-import io.konform.validation.jsonschema.minLength
 import io.swagger.v3.oas.annotations.media.ArraySchema
 import io.swagger.v3.oas.annotations.media.Schema
 import java.time.LocalDate
@@ -33,14 +32,8 @@ data class KonformGeneralAgencyForm(
     companion object {
         val validate = Validation<KonformGeneralAgencyForm> {
             KonformGeneralAgencyForm::agency { enum(Agency.GENERAL) }
-            KonformGeneralAgencyForm::firstName {
-                minLength(1)
-                maxLength(50)
-            }
-            KonformGeneralAgencyForm::lastName {
-                minLength(1)
-                maxLength(50)
-            }
+            KonformGeneralAgencyForm::firstName { length(1, 50) }
+            KonformGeneralAgencyForm::lastName { length(1, 50) }
         }
     }
 }

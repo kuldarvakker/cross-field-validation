@@ -1,5 +1,6 @@
 package ee.taltech.crossfieldvalidation.hibernate.constraints
 
+import ee.taltech.crossfieldvalidation.checkLocalDateIsAfterOrEqualsTo
 import jakarta.validation.Constraint
 import jakarta.validation.ConstraintValidator
 import jakarta.validation.ConstraintValidatorContext
@@ -33,7 +34,7 @@ class CheckDateIsAfterOrEqualsValidator : ConstraintValidator<CheckDateIsAfterOr
     override fun isValid(value: LocalDate?, context: ConstraintValidatorContext): Boolean {
         value ?: return true
 
-        val isValid = value.isAfter(localDate) || value.isEqual(localDate)
+        val isValid = checkLocalDateIsAfterOrEqualsTo(value, localDate)
 
         return isValid
     }

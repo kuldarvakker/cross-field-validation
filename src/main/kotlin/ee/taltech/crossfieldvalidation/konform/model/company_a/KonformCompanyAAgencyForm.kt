@@ -1,11 +1,11 @@
 package ee.taltech.crossfieldvalidation.konform.model.company_a
 
+import ee.taltech.crossfieldvalidation.checkLocalDateIsAfterOrEqualsTo
 import ee.taltech.crossfieldvalidation.common.model.Agency
+import ee.taltech.crossfieldvalidation.konform.length
 import ee.taltech.crossfieldvalidation.konform.model.KonformAgencyForm
 import io.konform.validation.Validation
 import io.konform.validation.jsonschema.enum
-import io.konform.validation.jsonschema.maxLength
-import io.konform.validation.jsonschema.minLength
 import io.swagger.v3.oas.annotations.media.Schema
 import java.time.LocalDate
 
@@ -27,22 +27,16 @@ data class KonformCompanyAAgencyForm(
     companion object {
         val validate = Validation<KonformCompanyAAgencyForm> {
             KonformCompanyAAgencyForm::agency { enum(Agency.COMPANY_A) }
-            KonformCompanyAAgencyForm::firstName {
-                minLength(1)
-                maxLength(128)
-            }
-            KonformCompanyAAgencyForm::lastName {
-                minLength(1)
-                maxLength(128)
-            }
+            KonformCompanyAAgencyForm::firstName { length(1, 128) }
+            KonformCompanyAAgencyForm::lastName { length(1, 128) }
             KonformCompanyAAgencyForm::birthDate {
                 val reqDate = LocalDate.ofYearDay(2000, 1)
-                addConstraint(
-                    "Date must be after or equals to ${reqDate.year}-${reqDate.monthValue}-${reqDate.dayOfMonth}"
-                ) {
-                    it.isEqual(reqDate).or(it.isAfter(reqDate))
+                addConstraint("Date must be after or equals to ${reqDate.year}-${reqDate.monthValue}-${reqDate.dayOfMonth}") {
+                    checkLocalDateIsAfterOrEqualsTo(it, reqDate)
                 }
             }
+            KonformCompanyAAgencyForm::phoneNumber ifPresent { length(5, 35) }
+            KonformCompanyAAgencyForm::email ifPresent { length(1, 128) }
 
             addConstraint("phoneNumber or email must be present") { person ->
                 (!person.phoneNumber.isNullOrBlank() || !person.email.isNullOrBlank())

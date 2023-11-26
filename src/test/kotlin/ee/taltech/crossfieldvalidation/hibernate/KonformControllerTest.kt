@@ -58,7 +58,7 @@ class KonformControllerTest(@Autowired private val mockMvc: MockMvc) {
                     },
                     {
                       "field": ".firstName",
-                      "message": "must have at least 1 characters"
+                      "message": "size must be between 1 and 128"
                     }
                   ]
                 }
@@ -99,11 +99,11 @@ class KonformControllerTest(@Autowired private val mockMvc: MockMvc) {
                       "errors": [
                         {
                           "field": ".socialMedia[2].profileUrl",
-                          "message": "must have at most 128 characters"
+                          "message": "size must be between 1 and 128"
                         },
                         {
                           "field": ".socialMedia",
-                          "message": "must have at most 2 items"
+                          "message": "size must be between 1 and 2"
                         },
                         {
                           "field": ".socialMedia[2].platform",

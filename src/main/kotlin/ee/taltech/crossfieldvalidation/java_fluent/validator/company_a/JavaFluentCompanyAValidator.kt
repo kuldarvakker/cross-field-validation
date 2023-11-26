@@ -31,7 +31,11 @@ class JavaFluentCompanyAValidator : FluentValidator<JavaFluentCompanyAAgencyForm
             predicate = stringSizeBetween(5, 35),
             errorMessage = "size must be between 5 and 35"
         )
-
+        fieldRuleOf(
+            field = JavaFluentCompanyAAgencyForm::email,
+            predicate = stringSizeBetween(1, 128),
+            errorMessage = "size must be between 1 and 128"
+        )
         entityRuleOf(
             fieldName = JavaFluentCompanyAAgencyForm::phoneNumber.name,
             predicate = {!it.phoneNumber.isNullOrBlank() || !it.email.isNullOrBlank()},

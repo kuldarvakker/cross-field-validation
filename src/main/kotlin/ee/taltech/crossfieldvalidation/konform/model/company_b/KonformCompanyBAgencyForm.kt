@@ -6,13 +6,11 @@ import ee.taltech.crossfieldvalidation.common.model.attributes.Gender
 import ee.taltech.crossfieldvalidation.common.model.attributes.HeightUnits
 import ee.taltech.crossfieldvalidation.common.model.attributes.SocialMediaPlatforms.FACEBOOK
 import ee.taltech.crossfieldvalidation.common.model.attributes.SocialMediaPlatforms.TWITTER_X
+import ee.taltech.crossfieldvalidation.konform.length
 import ee.taltech.crossfieldvalidation.konform.model.KonformAgencyForm
+import ee.taltech.crossfieldvalidation.konform.size
 import io.konform.validation.Validation
 import io.konform.validation.jsonschema.enum
-import io.konform.validation.jsonschema.maxItems
-import io.konform.validation.jsonschema.maxLength
-import io.konform.validation.jsonschema.minItems
-import io.konform.validation.jsonschema.minLength
 import io.konform.validation.onEach
 import io.swagger.v3.oas.annotations.media.ArraySchema
 import io.swagger.v3.oas.annotations.media.Schema
@@ -33,26 +31,14 @@ data class KonformCompanyBAgencyForm(
     companion object {
         val validate = Validation<KonformCompanyBAgencyForm> {
             KonformCompanyBAgencyForm::agency { enum(Agency.COMPANY_B) }
-            KonformCompanyBAgencyForm::firstName {
-                minLength(1)
-                maxLength(50)
-            }
-            KonformCompanyBAgencyForm::lastName {
-                minLength(1)
-                maxLength(50)
-            }
+            KonformCompanyBAgencyForm::firstName { length(1, 50) }
+            KonformCompanyBAgencyForm::lastName { length(1, 50) }
             KonformCompanyBAgencyForm::gender { enum(Gender.MALE) }
             KonformCompanyBAgencyForm::socialMedia {
-                minItems(1)
-                maxItems(2)
+                size(1, 2)
                 onEach {
-                    KonformCompanyBSocialMedia::platform {
-                        enum(FACEBOOK, TWITTER_X)
-                    }
-                    KonformCompanyBSocialMedia::profileUrl {
-                        minLength(1)
-                        maxLength(128)
-                    }
+                    KonformCompanyBSocialMedia::platform { enum(FACEBOOK, TWITTER_X) }
+                    KonformCompanyBSocialMedia::profileUrl { length(1, 128) }
                 }
             }
             KonformCompanyBAgencyForm::height {

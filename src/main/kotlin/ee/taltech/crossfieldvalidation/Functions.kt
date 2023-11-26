@@ -1,6 +1,7 @@
 package ee.taltech.crossfieldvalidation
 
 import java.math.BigDecimal
+import java.time.LocalDate
 import java.util.function.Predicate
 
 fun checkNumericValueBounds(value: BigDecimal, maxIntegerLimit: Int, maxFractionLimit: Int): Boolean {
@@ -17,4 +18,8 @@ fun checkNumericValueBounds(maxIntegerLimit: Int, maxFractionLimit: Int): Predic
             checkNumericValueBounds(this, maxIntegerLimit, maxFractionLimit)
         } ?: true
     }
+}
+
+fun checkLocalDateIsAfterOrEqualsTo(value: LocalDate, constraint: LocalDate): Boolean {
+    return value.isAfter(constraint) || value.isEqual(constraint)
 }
