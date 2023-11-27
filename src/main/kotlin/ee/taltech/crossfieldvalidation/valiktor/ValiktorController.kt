@@ -2,7 +2,7 @@ package ee.taltech.crossfieldvalidation.valiktor
 
 import ee.taltech.crossfieldvalidation.ValidationError
 import ee.taltech.crossfieldvalidation.ValidationErrors
-import ee.taltech.crossfieldvalidation.valiktor.model.ValiktorPerson
+import ee.taltech.crossfieldvalidation.valiktor.model.ValiktorAgencyForm
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.RestController
@@ -19,7 +19,7 @@ import java.util.Locale
 class ValiktorController {
 
     @PostMapping("/api/valiktor")
-    fun validatePerson(@RequestBody person: ValiktorPerson): ResponseEntity<ValiktorPerson> {
+    fun validatePerson(@RequestBody person: ValiktorAgencyForm): ResponseEntity<ValiktorAgencyForm> {
         return ResponseEntity.status(HttpStatus.OK).body(person)
     }
 
