@@ -8,6 +8,8 @@ import ee.taltech.crossfieldvalidation.yavi.model.company_a.YaviCompanyAAgencyFo
 import ee.taltech.crossfieldvalidation.yavi.model.company_a.yaviCompanyAAgencyFormValidator
 import ee.taltech.crossfieldvalidation.yavi.model.company_b.YaviCompanyBAgencyForm
 import ee.taltech.crossfieldvalidation.yavi.model.company_b.yaviCompanyBAgencyFormValidator
+import ee.taltech.crossfieldvalidation.yavi.model.general.YaviGeneralAgencyForm
+import ee.taltech.crossfieldvalidation.yavi.model.general.yaviGeneralAgencyFormValidator
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -31,7 +33,7 @@ class YaviController {
 
     private fun validate(person: YaviAgencyForm): ValidationErrors {
         val results = when(person.agency) {
-            Agency.GENERAL -> yaviCompanyAAgencyFormValidator.validate(person as YaviCompanyAAgencyForm)
+            Agency.GENERAL -> yaviGeneralAgencyFormValidator.validate(person as YaviGeneralAgencyForm)
             Agency.COMPANY_A -> yaviCompanyAAgencyFormValidator.validate(person as YaviCompanyAAgencyForm)
             Agency.COMPANY_B -> yaviCompanyBAgencyFormValidator.validate(person as YaviCompanyBAgencyForm)
         }
