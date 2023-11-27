@@ -4,12 +4,10 @@ import ee.taltech.crossfieldvalidation.ValidationError
 import ee.taltech.crossfieldvalidation.ValidationErrors
 import ee.taltech.crossfieldvalidation.common.model.Agency
 import ee.taltech.crossfieldvalidation.yavi.model.YaviAgencyForm
-import ee.taltech.crossfieldvalidation.yavi.model.yaviPrivatePersonValidator
-import ee.taltech.crossfieldvalidation.yavi.model.yaviCompanyValidator
-import ee.taltech.crossfieldvalidation.yavi.model.YaviCompany
-import ee.taltech.crossfieldvalidation.yavi.model.YaviPrivatePerson
 import ee.taltech.crossfieldvalidation.yavi.model.company_a.YaviCompanyAAgencyForm
 import ee.taltech.crossfieldvalidation.yavi.model.company_a.yaviCompanyAAgencyFormValidator
+import ee.taltech.crossfieldvalidation.yavi.model.company_b.YaviCompanyBAgencyForm
+import ee.taltech.crossfieldvalidation.yavi.model.company_b.yaviCompanyBAgencyFormValidator
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -33,9 +31,9 @@ class YaviController {
 
     private fun validate(person: YaviAgencyForm): ValidationErrors {
         val results = when(person.agency) {
-            Agency.GENERAL -> yaviPrivatePersonValidator.validate(person as YaviPrivatePerson)
+            Agency.GENERAL -> yaviCompanyAAgencyFormValidator.validate(person as YaviCompanyAAgencyForm)
             Agency.COMPANY_A -> yaviCompanyAAgencyFormValidator.validate(person as YaviCompanyAAgencyForm)
-            Agency.COMPANY_B -> yaviCompanyValidator.validate(person as YaviCompany)
+            Agency.COMPANY_B -> yaviCompanyBAgencyFormValidator.validate(person as YaviCompanyBAgencyForm)
         }
         return if (!results.isValid) {
             val errors = results.details().map {

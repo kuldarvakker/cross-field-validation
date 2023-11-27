@@ -99,19 +99,19 @@ class YaviControllerTest(@Autowired private val mockMvc: MockMvc) {
                       "errors": [
                         {
                           "field": "socialMedia[2].profileUrl",
-                          "message": "size must be between 1 and 128"
+                          "message": "The size of \"socialMedia[2].profileUrl\" must be less than or equal to 128. The given size is 146"
                         },
                         {
                           "field": "socialMedia",
-                          "message": "size must be between 1 and 2"
+                          "message": "The size of \"socialMedia\" must be less than or equal to 2. The given size is 3"
                         },
                         {
                           "field": "socialMedia[2].platform",
-                          "message": "Value TIKTOK not allowed. Allowed values are [FACEBOOK, TWITTER_X]"
+                          "message": "Allowed values are: [FACEBOOK, TWITTER_X]"
                         },
                         {
                           "field": "height.unit",
-                          "message": "Value M not allowed. Allowed values are [CM]"
+                          "message": "Allowed values are: [CM]"
                         },
                         {
                           "field": "height.value",
