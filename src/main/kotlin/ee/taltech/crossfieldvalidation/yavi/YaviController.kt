@@ -3,11 +3,13 @@ package ee.taltech.crossfieldvalidation.yavi
 import ee.taltech.crossfieldvalidation.ValidationError
 import ee.taltech.crossfieldvalidation.ValidationErrors
 import ee.taltech.crossfieldvalidation.common.model.Agency
+import ee.taltech.crossfieldvalidation.yavi.model.YaviAgencyForm
 import ee.taltech.crossfieldvalidation.yavi.model.yaviPrivatePersonValidator
 import ee.taltech.crossfieldvalidation.yavi.model.yaviCompanyValidator
-import ee.taltech.crossfieldvalidation.yavi.model.YaviPerson
 import ee.taltech.crossfieldvalidation.yavi.model.YaviCompany
 import ee.taltech.crossfieldvalidation.yavi.model.YaviPrivatePerson
+import ee.taltech.crossfieldvalidation.yavi.model.company_a.YaviCompanyAAgencyForm
+import ee.taltech.crossfieldvalidation.yavi.model.company_a.yaviCompanyAAgencyFormValidator
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -19,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController
 class YaviController {
 
     @PostMapping("/api/yavi")
-    fun validatePerson(@Valid @RequestBody person: YaviPerson): ResponseEntity<*> {
+    fun validatePerson(@Valid @RequestBody person: YaviAgencyForm): ResponseEntity<*> {
         val validationErrors = validate(person)
 
         return if (validationErrors.errors.isEmpty()) {
@@ -29,10 +31,10 @@ class YaviController {
         }
     }
 
-    private fun validate(person: YaviPerson): ValidationErrors {
-        val results = when(person.type) {
+    private fun validate(person: YaviAgencyForm): ValidationErrors {
+        val results = when(person.agency) {
             Agency.GENERAL -> yaviPrivatePersonValidator.validate(person as YaviPrivatePerson)
-            Agency.COMPANY_A -> yaviCompanyValidator.validate(person as YaviCompany)
+            Agency.COMPANY_A -> yaviCompanyAAgencyFormValidator.validate(person as YaviCompanyAAgencyForm)
             Agency.COMPANY_B -> yaviCompanyValidator.validate(person as YaviCompany)
         }
         return if (!results.isValid) {
