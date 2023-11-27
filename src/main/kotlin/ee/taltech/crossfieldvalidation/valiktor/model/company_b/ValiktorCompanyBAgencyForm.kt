@@ -7,6 +7,7 @@ import ee.taltech.crossfieldvalidation.common.model.attributes.HeightUnits
 import ee.taltech.crossfieldvalidation.common.model.attributes.SocialMediaPlatforms.FACEBOOK
 import ee.taltech.crossfieldvalidation.common.model.attributes.SocialMediaPlatforms.TWITTER_X
 import ee.taltech.crossfieldvalidation.valiktor.model.ValiktorAgencyForm
+import ee.taltech.crossfieldvalidation.valiktor.model.attributes.ValiktorWeight
 import ee.taltech.crossfieldvalidation.valiktor.withMessage
 import io.swagger.v3.oas.annotations.media.ArraySchema
 import io.swagger.v3.oas.annotations.media.Schema
@@ -41,10 +42,10 @@ data class ValiktorCompanyBAgencyForm(
                 validate(ValiktorCompanyBSocialMedia::platform).isIn(FACEBOOK, TWITTER_X)
                 validate(ValiktorCompanyBSocialMedia::profileUrl).hasSize(1, 128)
             }
-            validate(ValiktorCompanyBAgencyForm::height).validate { height ->
+            validate(ValiktorCompanyBAgencyForm::height).validate {
                 validate(ValiktorCompanyBHeight::unit).isIn(HeightUnits.CM)
-                validate(ValiktorCompanyBHeight::value).withMessage("numeric value out of bounds (<3 digits>.<0 digits> expected)") {
-                    checkNumericValueBounds(height.value, 3, 2)
+                validate(ValiktorCompanyBHeight::value).withMessage("numeric value out of bounds (<3 digits>.<0 digits> expected)") { value ->
+                    value?.let { checkNumericValueBounds(it, 3,0) } ?: true
                 }
             }
         }
