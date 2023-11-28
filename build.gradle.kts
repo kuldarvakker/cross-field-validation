@@ -4,7 +4,8 @@ plugins {
 	id("org.springframework.boot") version "3.0.2"
 	id("io.spring.dependency-management") version "1.1.0"
 	id("org.asciidoctor.convert") version "2.4.0"
-	kotlin("jvm") version "1.8.20"
+	id("com.google.devtools.ksp") version "1.9.10-1.0.13"
+	kotlin("jvm") version "1.9.10"
 	kotlin("plugin.spring") version "1.8.20"
 }
 
@@ -44,6 +45,11 @@ dependencies {
 
 	// yavi
 	implementation("am.ik.yavi:yavi:0.12.1")
+
+	// akkurate
+	implementation("dev.nesk.akkurate:akkurate-core:0.4.0")
+	implementation("dev.nesk.akkurate:akkurate-ksp-plugin:0.4.0")
+	ksp("dev.nesk.akkurate:akkurate-ksp-plugin:0.4.0")
 }
 
 tasks.withType<KotlinCompile> {
