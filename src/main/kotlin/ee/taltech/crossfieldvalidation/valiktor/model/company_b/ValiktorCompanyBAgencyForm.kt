@@ -7,7 +7,6 @@ import ee.taltech.crossfieldvalidation.common.model.attributes.HeightUnits
 import ee.taltech.crossfieldvalidation.common.model.attributes.SocialMediaPlatforms.FACEBOOK
 import ee.taltech.crossfieldvalidation.common.model.attributes.SocialMediaPlatforms.TWITTER_X
 import ee.taltech.crossfieldvalidation.valiktor.model.ValiktorAgencyForm
-import ee.taltech.crossfieldvalidation.valiktor.model.attributes.ValiktorWeight
 import ee.taltech.crossfieldvalidation.valiktor.withMessage
 import io.swagger.v3.oas.annotations.media.ArraySchema
 import io.swagger.v3.oas.annotations.media.Schema
