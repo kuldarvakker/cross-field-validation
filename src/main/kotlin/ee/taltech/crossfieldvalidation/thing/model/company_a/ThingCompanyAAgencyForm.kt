@@ -44,12 +44,14 @@ data class ThingCompanyAAgencyForm(
             }
         }
 
+    @JvmName("nLength")
     private fun ValidationRuleBuilder<String?>.length(min: Int, max: Int) {
         addValidator("Length must be between $min and $max") {
             it == null || (it.length in min..max)
         }
     }
 
+    @JvmName("length")
     private fun ValidationRuleBuilder<String>.length(min: Int, max: Int) {
         addValidator("Length must be between $min and $max") {
             it == null || (it.length in min..max)
