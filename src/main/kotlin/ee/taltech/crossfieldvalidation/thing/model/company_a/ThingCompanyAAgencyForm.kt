@@ -1,8 +1,13 @@
 package ee.taltech.crossfieldvalidation.thing.model.company_a
 
+import ee.taltech.crossfieldvalidation.checkLocalDateIsAfterOrEqualsTo
 import ee.taltech.crossfieldvalidation.common.model.Agency
 import ee.taltech.crossfieldvalidation.thing.model.ThingAgencyForm
 import io.swagger.v3.oas.annotations.media.Schema
+import so.kciter.thing.Rule
+import so.kciter.thing.Thing
+import so.kciter.thing.validator.ValidationRuleBuilder
+import so.kciter.thing.validator.equal
 import java.time.LocalDate
 
 data class ThingCompanyAAgencyForm(
@@ -18,4 +23,36 @@ data class ThingCompanyAAgencyForm(
     override val phoneNumber: String?,
     @field:Schema(minLength = 1, maxLength = 128, description = "phoneNumber or email must be present", example = "email@email.ee")
     override val email: String?,
-) : ThingAgencyForm()
+) : ThingAgencyForm(), Thing<ThingCompanyAAgencyForm> {
+    override val rule: Rule<ThingCompanyAAgencyForm>
+        get() = Rule {
+            Validation {
+                ThingCompanyAAgencyForm::agency { equal(Agency.COMPANY_A) }
+                ThingCompanyAAgencyForm::firstName { length(1, 128) }
+                ThingCompanyAAgencyForm::lastName { length(1,128) }
+                ThingCompanyAAgencyForm::birthDate {
+                    addValidator("Date must be after or equals to 2000-01-01") {
+                        checkLocalDateIsAfterOrEqualsTo(it, LocalDate.ofYearDay(2000, 1))
+                    }
+                }
+                ThingCompanyAAgencyForm::phoneNumber { length(5, 35) }
+                ThingCompanyAAgencyForm::email { length(1, 128) }
+
+                addValidator("phoneNumber or email must be present") {
+                    (!it.phoneNumber.isNullOrBlank() || !it.email.isNullOrBlank())
+                }
+            }
+        }
+
+    private fun ValidationRuleBuilder<String?>.length(min: Int, max: Int) {
+        addValidator("Length must be between $min and $max") {
+            it == null || (it.length in min..max)
+        }
+    }
+
+    private fun ValidationRuleBuilder<String>.length(min: Int, max: Int) {
+        addValidator("Length must be between $min and $max") {
+            it == null || (it.length in min..max)
+        }
+    }
+}

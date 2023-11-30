@@ -50,6 +50,9 @@ dependencies {
 	implementation("dev.nesk.akkurate:akkurate-core:0.4.0")
 	implementation("dev.nesk.akkurate:akkurate-ksp-plugin:0.4.0")
 	ksp("dev.nesk.akkurate:akkurate-ksp-plugin:0.4.0")
+
+	// thing
+	implementation("so.kciter:thing:0.0.8")
 }
 
 tasks.withType<KotlinCompile> {
