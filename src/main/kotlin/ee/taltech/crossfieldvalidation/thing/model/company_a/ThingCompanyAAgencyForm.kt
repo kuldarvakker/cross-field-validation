@@ -8,6 +8,8 @@ import so.kciter.thing.Rule
 import so.kciter.thing.Thing
 import so.kciter.thing.validator.ValidationRuleBuilder
 import so.kciter.thing.validator.equal
+import so.kciter.thing.validator.maxLength
+import so.kciter.thing.validator.minLength
 import java.time.LocalDate
 
 data class ThingCompanyAAgencyForm(
@@ -35,8 +37,9 @@ data class ThingCompanyAAgencyForm(
                         checkLocalDateIsAfterOrEqualsTo(it, LocalDate.ofYearDay(2000, 1))
                     }
                 }
-                ThingCompanyAAgencyForm::phoneNumber { length(5, 35) }
-                ThingCompanyAAgencyForm::email { length(1, 128) }
+                ThingCompanyAAgencyForm::phoneNumber.ifPresent { length(5, 35) }
+                ThingCompanyAAgencyForm::email.ifPresent { length(1, 128) }
+                ThingCompanyAAgencyForm::phoneNumber {  }
 
                 addValidator("phoneNumber or email must be present") {
                     (!it.phoneNumber.isNullOrBlank() || !it.email.isNullOrBlank())
@@ -44,17 +47,8 @@ data class ThingCompanyAAgencyForm(
             }
         }
 
-    @JvmName("nLength")
-    private fun ValidationRuleBuilder<String?>.length(min: Int, max: Int) {
-        addValidator("Length must be between $min and $max") {
-            it == null || (it.length in min..max)
-        }
-    }
-
-    @JvmName("length")
     private fun ValidationRuleBuilder<String>.length(min: Int, max: Int) {
-        addValidator("Length must be between $min and $max") {
-            it == null || (it.length in min..max)
-        }
+        minLength(min)
+        maxLength(max)
     }
 }
