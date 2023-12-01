@@ -2,6 +2,10 @@ package ee.taltech.crossfieldvalidation.kalidation.model.company_a
 
 import ee.taltech.crossfieldvalidation.common.model.Agency
 import ee.taltech.crossfieldvalidation.kalidation.model.KalidationAgencyForm
+import io.github.rcapraro.kalidation.constraints.function.size
+import io.github.rcapraro.kalidation.dsl.constraints
+import io.github.rcapraro.kalidation.dsl.property
+import io.github.rcapraro.kalidation.dsl.validationSpec
 import io.swagger.v3.oas.annotations.media.Schema
 
 import java.time.LocalDate
@@ -20,3 +24,12 @@ data class KalidationCompanyAAgencyForm(
     @field:Schema(minLength = 1, maxLength = 128, description = "phoneNumber or email must be present", example = "email@email.ee")
     override val email: String?,
 ) : KalidationAgencyForm()
+
+val spec = validationSpec {
+    constraints<KalidationCompanyAAgencyForm> {
+        property(KalidationCompanyAAgencyForm::firstName) { size(1, 128) }
+        property(KalidationCompanyAAgencyForm::lastName) { size(1, 128) }
+        property(KalidationCompanyAAgencyForm::birthDate) {
+        }
+    }
+}
