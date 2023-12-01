@@ -53,6 +53,12 @@ dependencies {
 
 	// thing
 	implementation("so.kciter:thing:0.0.8")
+
+	// kalidation
+	implementation("io.github.rcapraro:kalidation:1.9.1")
+	implementation("io.arrow-kt:arrow-core:1.2.0-RC")
+	implementation("jakarta.validation:jakarta.validation-api:3.0.1")
+	implementation("org.glassfish:jakarta.el:4.0.2")
 }
 
 tasks.withType<KotlinCompile> {
