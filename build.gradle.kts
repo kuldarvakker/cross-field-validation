@@ -59,6 +59,9 @@ dependencies {
 	implementation("io.arrow-kt:arrow-core:1.2.0-RC")
 	implementation("jakarta.validation:jakarta.validation-api:3.0.1")
 	implementation("org.glassfish:jakarta.el:4.0.2")
+
+	// validoctor
+	implementation("com.miquido:validoctor:2.1.3")
 }
 
 tasks.withType<KotlinCompile> {
