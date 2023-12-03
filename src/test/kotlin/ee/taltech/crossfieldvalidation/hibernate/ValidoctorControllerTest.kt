@@ -58,7 +58,7 @@ class ValidoctorControllerTest(@Autowired private val mockMvc: MockMvc) {
                     },
                     {
                       "field": "firstName",
-                      "message": "TOO_SHORT"
+                      "message": "TOO_SHORT_OR_TOO_LONG"
                     }
                   ]
                 }
