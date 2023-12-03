@@ -27,10 +27,11 @@ data class ValidoctorCompanyAAgencyForm(
     override val email: String?,
 ) : ValidoctorAgencyForm()
 
-val checkLocalDateIsAfterOrEqualsToFirstDayOfYear2000: SimpleRule<LocalDate> =
-    SimpleRule("Date must be after or equals to 2000-01-01") {
-        it == null || checkLocalDateIsAfterOrEqualsTo(it, LocalDate.ofYearDay(2000, 1))
+fun isAfterOrEqualTo(constraint: LocalDate): SimpleRule<LocalDate> {
+    return SimpleRule("Date must be after or equals to $constraint") {
+        it == null || checkLocalDateIsAfterOrEqualsTo(it, constraint)
     }
+}
 
 val validoctorCompanyAAgencyFormValidator: Rule<ValidoctorCompanyAAgencyForm> =
     Validoctor.rulesFor(ValidoctorCompanyAAgencyForm::class.java)
@@ -44,13 +45,11 @@ val validoctorCompanyAAgencyFormValidator: Rule<ValidoctorCompanyAAgencyForm> =
         )
         .field(
             ValidoctorCompanyAAgencyForm::birthDate.name,
-            checkLocalDateIsAfterOrEqualsToFirstDayOfYear2000
+            isAfterOrEqualTo(LocalDate.ofYearDay(2000, 1))
         )
-        .rule(
-            "phoneNumber or email must be present",
-            ValidoctorCompanyAAgencyForm::phoneNumber.name,
-            { !it.phoneNumber.isNullOrBlank() || !it.email.isNullOrBlank() }
-        )
+        .rule("phoneNumber or email must be present", ValidoctorCompanyAAgencyForm::phoneNumber.name) {
+            !it.phoneNumber.isNullOrBlank() || !it.email.isNullOrBlank()
+        }
         .field(
             ValidoctorCompanyAAgencyForm::phoneNumber.name,
             stringLengthInRange(5, 35)
