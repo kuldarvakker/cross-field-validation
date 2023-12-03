@@ -2,6 +2,7 @@ package ee.taltech.crossfieldvalidation.validoctor.model.company_a
 
 import com.miquido.validoctor.Validoctor
 import com.miquido.validoctor.definition.Rule
+import com.miquido.validoctor.definition.RuleBuilder
 import com.miquido.validoctor.definition.Rules.equalTo
 import com.miquido.validoctor.definition.Rules.stringLengthInRange
 import com.miquido.validoctor.definition.SimpleRule
@@ -11,6 +12,7 @@ import ee.taltech.crossfieldvalidation.validoctor.model.ValidoctorAgencyForm
 import io.swagger.v3.oas.annotations.media.Schema
 
 import java.time.LocalDate
+import kotlin.reflect.KProperty1
 
 data class ValidoctorCompanyAAgencyForm(
     @field:Schema(allowableValues = ["COMPANY_A"])
@@ -33,29 +35,24 @@ fun isAfterOrEqualTo(constraint: LocalDate): SimpleRule<LocalDate> {
     }
 }
 
+fun <T, P> RuleBuilder<T>.field(field: KProperty1<T, P>, vararg rules: Rule<P>): RuleBuilder<T> {
+    return this.field(field.name, *rules)
+}
+
+fun <T, P> RuleBuilder<T>.fields(field: List<KProperty1<T, P>>, vararg rules: Rule<P>): RuleBuilder<T> {
+    return this.fields(field.map { it.name }.toList(), *rules)
+}
+
+
 val validoctorCompanyAAgencyFormValidator: Rule<ValidoctorCompanyAAgencyForm> =
     Validoctor.rulesFor(ValidoctorCompanyAAgencyForm::class.java)
-        .field(
-            ValidoctorCompanyAAgencyForm::agency.name,
-            equalTo(Agency.COMPANY_A)
-        )
-        .fields(
-            listOf(ValidoctorCompanyAAgencyForm::firstName.name, ValidoctorCompanyAAgencyForm::lastName.name),
-            stringLengthInRange(1, 128)
-        )
-        .field(
-            ValidoctorCompanyAAgencyForm::birthDate.name,
-            isAfterOrEqualTo(LocalDate.ofYearDay(2000, 1))
-        )
+        .field(ValidoctorCompanyAAgencyForm::agency, equalTo(Agency.COMPANY_A))
+        .field(ValidoctorCompanyAAgencyForm::firstName, stringLengthInRange(1,128))
+        .fields(listOf(ValidoctorCompanyAAgencyForm::firstName, ValidoctorCompanyAAgencyForm::lastName), stringLengthInRange(1, 128))
+        .field(ValidoctorCompanyAAgencyForm::birthDate, isAfterOrEqualTo(LocalDate.ofYearDay(2000, 1)))
         .rule("phoneNumber or email must be present", ValidoctorCompanyAAgencyForm::phoneNumber.name) {
             !it.phoneNumber.isNullOrBlank() || !it.email.isNullOrBlank()
         }
-        .field(
-            ValidoctorCompanyAAgencyForm::phoneNumber.name,
-            stringLengthInRange(5, 35)
-        )
-        .field(
-            ValidoctorCompanyAAgencyForm::email.name,
-            stringLengthInRange(1, 128)
-        )
+        .field(ValidoctorCompanyAAgencyForm::phoneNumber, stringLengthInRange(5, 35))
+        .field(ValidoctorCompanyAAgencyForm::email, stringLengthInRange(1, 128))
         .build()
