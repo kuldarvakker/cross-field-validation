@@ -5,6 +5,7 @@ plugins {
 	id("io.spring.dependency-management") version "1.1.0"
 	id("org.asciidoctor.convert") version "2.4.0"
 	id("com.google.devtools.ksp") version "1.9.10-1.0.13"
+	id("com.github.evestera.depsize") version "0.2.0"
 	kotlin("jvm") version "1.9.10"
 	kotlin("plugin.spring") version "1.8.20"
 }
